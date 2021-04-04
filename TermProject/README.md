@@ -28,19 +28,19 @@
 
 2. 게임 플레이
 	- 자원(골드)를 소비하여 타워 건설
-<img  width="500"  src="./img/build.png">
+<img  width="500"  src="./image/build.png">
 	- 적은 맵의 끝 부분 특정 위치에서 부터 길을 따라 이동
-<img  width="500"  src="./img/location.png">
+<img  width="500"  src="./image/location.png">
 	- 길을 따라 이동하는 적을 타워로 자동 공격
-<img  width="500"  src="./img/fight.png">
+<img  width="500"  src="./image/fight.png">
 	- 적이 길의 반대편 끝까지 이동할 경우 목숨이 줄어들고 0이 될 시 패배
-<img  width="500"  src="./img/die.png">
+<img  width="500"  src="./image/die.png">
 	- 적을 죽여 모은 자원으로 다른 타워를 건설하거나 건설된 타워 업그레이드
-<img  width="500"  src="./img/upgrade.png">
+<img  width="500"  src="./image/upgrade.png">
 	- 특수 능력으로 강력한 공격을 적에게 줄 수 있음
-<img  width="500"  src="./img/power.png">
+<img  width="500"  src="./image/power.png">
 	- 모든 웨이브(적 무리의 이동) 동안 목숨이 0이 되지 않는다면 승리
-<img  width="500"  src="./img/victory.png">
+<img  width="500"  src="./image/victory.png">
 
 **4. 개발 일정**
 | 주 |  날짜 |개발 내용|
