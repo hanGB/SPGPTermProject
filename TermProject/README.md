@@ -21,15 +21,15 @@
 1. 예상 게임 스테이트
 	
 	
-<img  width="300"  src="https://ww.namu.la/s/d275d88bfe5668dcafafbfaa14715e436035cdf4f04fadeeb2603e2e68146c26b736aa089da3a81f685497316743b24ca097a233f7e8caddf9bde43406cd04c7e3f2a47156e92b236f86b38e22b5d89401484b0c7856698b5cfb01346075368b71a029a763a1fa8d45e7962edcc9ca82">
+<img  width="300"  src="./image/mainMenu.png">
 	
 	- 메인 메뉴 스테이트
 	
-<img  width="300"  src="https://ww.namu.la/s/ab7204225d8ecc5fae9797056cd5ef4256f0d81716322172f1ef1b1f1b9a67d84c5d7bbc58e29fc3a4173f567867fda6c2ef67c85aa5e0491408b60eb1f457699c1a666c6c01df78c3e1f1bfbfb8c26dbeb2916462ed52beb2c95df3f282b193009a0eb96b0330ab2be3af7e229af451">
+<img  width="300"  src="./image/mapSelect.png">
 	
 	- 스테이지 선택 스테이트
 	
-<img  width="300"  src="https://files.ironhidegames.com/ironhidegames-www-upfiles/original/Games/751ffc46-cf39-4b01-ab82-39673627c11c.jpg">
+<img  width="300"  src="./image/gamePlay.png">
 	
 	- 게임 플레이 스테이트
 
