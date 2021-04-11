@@ -13,8 +13,8 @@ public class MainMenuState {
     private static int backGroundImageWidth;
     private static int backGroundImageHeight;
     private static Bitmap buttonImage;
-    private static int buttonImageImageWidth;
-    private static int buttonImageImageHeight;
+    private static int buttonImageWidth;
+    private static int buttonImageHeight;
 
     public static MainMenuState get() {
         if (instance == null) {
@@ -31,8 +31,8 @@ public class MainMenuState {
         }
         if (buttonImage == null) {
             buttonImage = BitmapFactory.decodeResource(GameView.view.getResources(), R.mipmap.screens_common_ko);
-            buttonImageImageWidth = buttonImage.getWidth();
-            buttonImageImageHeight = buttonImage.getHeight();
+            buttonImageWidth = buttonImage.getWidth();
+            buttonImageHeight = buttonImage.getHeight();
         }
     }
 
@@ -52,10 +52,28 @@ public class MainMenuState {
     }
 
     public void draw(Canvas canvas){
-
+        // 배경
         canvas.drawBitmap(backGroundImage,
                 new Rect(6, 6, backGroundImageWidth * 679 / 1000, backGroundImageHeight * 315 / 1000),
                 new Rect(0, 0, canvas.getWidth(), canvas.getHeight()),
+                null);
+
+        // 시작 버튼
+        canvas.drawBitmap(buttonImage,
+                new Rect(5, 5,
+                        buttonImageWidth * 326 / 1000, buttonImageHeight * 283 / 1000),
+                new Rect(canvas.getWidth() / 2 - buttonImageWidth * 300 / 1000, canvas.getHeight() * 2 / 5,
+                        canvas.getWidth() / 2 + buttonImageWidth * 400 / 1000,
+                        canvas.getHeight() * 2 / 5 + canvas.getHeight() * 2 / 5),
+                null);
+
+        // 게임 로고
+        canvas.drawBitmap(backGroundImage,
+                new Rect(backGroundImageWidth * 445 / 1000, backGroundImageHeight * 316 / 1000,
+                        backGroundImageWidth * 679 / 1000, backGroundImageHeight * 479 / 1000),
+                new Rect(canvas.getWidth() / 2 - backGroundImageWidth * 234 / 1000, 0,
+                        canvas.getWidth() / 2 - backGroundImageWidth * 234 / 1000 + canvas.getHeight() / 2 * 234 / 163,
+                        canvas.getHeight() / 2),
                 null);
     }
 
