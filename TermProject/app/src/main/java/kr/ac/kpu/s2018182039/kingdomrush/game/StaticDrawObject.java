@@ -10,8 +10,8 @@ public class StaticDrawObject implements GameObject {
     private float x, y;
     private final StaticGameBitmap bitmap;
 
-    public StaticDrawObject(int resId, float x, float y, int left, int top, int right, int bottom) {
-        bitmap = new StaticGameBitmap(resId, left, top, right, bottom);
+    public StaticDrawObject(int resId, float x, float y, int left, int top, int right, int bottom, int pixel_size) {
+        bitmap = new StaticGameBitmap(resId, left, top, right, bottom, pixel_size);
         this.x = x;
         this.y = y;
     }

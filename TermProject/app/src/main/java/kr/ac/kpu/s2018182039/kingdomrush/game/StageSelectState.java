@@ -1,25 +1,25 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game;
 
+
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.ui.view.GameView;
-import kr.ac.kpu.s2018182039.kingdomrush.R;
 
-public class MainMenuState {
+public class StageSelectState {
     // Singleton
-    private static MainMenuState instance;
+    private static StageSelectState instance;
 
     ArrayList<GameObject> objects = new ArrayList<>();
-    private MovingButtonObject startButton;
+    private MovingBackgroundObject backgroundMap;
 
-    public static MainMenuState get() {
+    public static StageSelectState get() {
         if (instance == null) {
-            instance = new MainMenuState();
+            instance = new StageSelectState();
         }
         return instance;
     }
@@ -37,20 +37,10 @@ public class MainMenuState {
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
 
-        StaticDrawObject background
-                = new StaticDrawObject(R.mipmap.screen_slots, w/2, h/2, 6, 6, 1392, 646, 2);
+        backgroundMap = new MovingBackgroundObject(R.mipmap.screen_map_background,
+                w/2, h/2, 30, 80, 940, 740, 3);
 
-        StaticDrawObject title
-                = new StaticDrawObject(R.mipmap.screen_slots, w/2, h/3, 920, 650, 1387, 977, 2);
-
-        Rect rect = new Rect(6, 6, 334,290);
-        Rect rectPressed = new Rect(340, 6, 668,290);
-        startButton = new MovingButtonObject(R.mipmap.screens_common_ko, R.mipmap.screens_common_ko,
-                w/2, h * 5 / 10,w/2, h * 7 / 10, rect, rectPressed, 2);
-
-        objects.add(background);
-        objects.add(startButton);
-        objects.add(title);
+        objects.add(backgroundMap);
 
         initialized = true;
         return true;
@@ -59,11 +49,6 @@ public class MainMenuState {
     public void update() {
         for (GameObject o : objects) {
             o.update();
-        }
-        if (startButton.IsUsed()) {
-            clear();
-            initialized = false;
-            staring = true;
         }
     }
 
@@ -75,12 +60,16 @@ public class MainMenuState {
 
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
-            startButton.pressOn(event.getX(), event.getY(), true);
+        if (action == MotionEvent.ACTION_DOWN) {
+            backgroundMap.pressDown(event.getX(), event.getY());
+            return true;
+        }
+        else if (action == MotionEvent.ACTION_MOVE) {
+            backgroundMap.pressMove(event.getX(), event.getY());
             return true;
         }
         else if (action == MotionEvent.ACTION_UP) {
-            startButton.pressOn(event.getX(), event.getY(), false);
+            backgroundMap.pressUp();
             return true;
         }
         return false;

@@ -19,9 +19,11 @@ public class MovingButtonObject implements GameObject {
     private float distanceY;
     private float speed = 2.f;
 
-    public MovingButtonObject(int resId, int resIdPressed, float x, float y, float dx, float dy, Rect rect, Rect rectPressed) {
-        bitmap = new StaticGameBitmap(resId, rect.left, rect.top, rect.right, rect.bottom);
-        bitmapPressed = new StaticGameBitmap(resIdPressed, rectPressed.left, rectPressed.top, rectPressed.right, rectPressed.bottom);
+    public MovingButtonObject(int resId, int resIdPressed, float x, float y, float dx, float dy,
+                              Rect rect, Rect rectPressed, int pixel_size) {
+        bitmap = new StaticGameBitmap(resId, rect.left, rect.top, rect.right, rect.bottom, pixel_size);
+        bitmapPressed = new StaticGameBitmap(resIdPressed,
+                rectPressed.left, rectPressed.top, rectPressed.right, rectPressed.bottom, pixel_size);
         this.x = x;
         this.y = y;
         this.dx = dx;

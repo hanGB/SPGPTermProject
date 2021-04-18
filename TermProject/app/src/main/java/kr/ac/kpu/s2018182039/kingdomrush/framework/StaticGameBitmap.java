@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import kr.ac.kpu.s2018182039.kingdomrush.ui.view.GameView;
 
 public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap {
-    private static final int PIXEL_SIZE = 2;
+    private final int pixel_size;
     private final int left;
     private final int top;
     private final int right;
@@ -20,7 +20,7 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
     private final int imageWidth;
     private final int imageHeight;
 
-    public StaticGameBitmap(int resId, int left, int top, int right, int bottom) {
+    public StaticGameBitmap(int resId, int left, int top, int right, int bottom, int pixel_size) {
         bitmap = kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap.load(resId);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
@@ -28,13 +28,14 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
         this.top = top;
         this.right = right;
         this.bottom = bottom;
+        this.pixel_size = pixel_size;
     }
 
     public void draw(Canvas canvas, float x, float y) {
         int w = right - left;
         int h = bottom - top;
-        int hw = w / 2 * PIXEL_SIZE;
-        int hh = h / 2 * PIXEL_SIZE;
+        int hw = w / 2 * pixel_size;
+        int hh = h / 2 * pixel_size;
 
         Rect src = new Rect(left, top, right, bottom);
         RectF dst = new RectF(x - hw, y - hh, x + hw, y + hh);
@@ -43,9 +44,9 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
     }
 
     public int getWidth() {
-        return (right - left) * PIXEL_SIZE;
+        return (right - left) * pixel_size;
     }
     public int getHeight() {
-        return (bottom - top) * PIXEL_SIZE;
+        return (bottom - top) * pixel_size;
     }
 }
