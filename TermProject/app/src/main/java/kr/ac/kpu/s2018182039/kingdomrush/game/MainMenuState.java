@@ -1,8 +1,8 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ public class MainMenuState {
     private static MainMenuState instance;
 
     ArrayList<GameObject> objects = new ArrayList<>();
+    private MovingButtonObject startButton;
 
     public static MainMenuState get() {
         if (instance == null) {
@@ -36,7 +37,18 @@ public class MainMenuState {
 
         StaticDrawObject background
                 = new StaticDrawObject(R.mipmap.screen_slots, w/2, h/2, 6, 6, 1392, 646);
+
+        StaticDrawObject title
+                = new StaticDrawObject(R.mipmap.screen_slots, w/2, h/3, 920, 650, 1387, 977);
+
+        Rect rect = new Rect(6, 6, 334,290);
+        Rect rectPressed = new Rect(340, 6, 668,290);
+        startButton = new MovingButtonObject(R.mipmap.screens_common_ko, R.mipmap.screens_common_ko,
+                w/2, h * 5 / 10,w/2, h * 7 / 10, rect, rectPressed);
+
         objects.add(background);
+        objects.add(startButton);
+        objects.add(title);
 
         initialized = true;
         return true;

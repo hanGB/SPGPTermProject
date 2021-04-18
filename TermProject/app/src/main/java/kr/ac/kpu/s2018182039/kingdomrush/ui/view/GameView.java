@@ -3,6 +3,7 @@ package kr.ac.kpu.s2018182039.kingdomrush.ui.view;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Choreographer;
 import android.view.MotionEvent;
 import android.view.View;
@@ -27,8 +28,8 @@ public class GameView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         //super.onSizeChanged(w, h, oldw, oldh);
         MainMenuState state = MainMenuState.get();
-        state.initResources();
         boolean justInitialized = state.initResources();
+
         if (justInitialized){
             requestCallback();
         }
