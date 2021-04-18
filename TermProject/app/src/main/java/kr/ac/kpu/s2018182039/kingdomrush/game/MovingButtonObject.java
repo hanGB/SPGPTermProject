@@ -13,10 +13,11 @@ public class MovingButtonObject implements GameObject {
     private float dx, dy;
     private final StaticGameBitmap bitmap;
     private final StaticGameBitmap bitmapPressed;
-    public boolean pressed;
+    private boolean pressed;
+    private boolean used;
     private float distanceX;
     private float distanceY;
-    private float speed = 3.f;
+    private float speed = 2.f;
 
     public MovingButtonObject(int resId, int resIdPressed, float x, float y, float dx, float dy, Rect rect, Rect rectPressed) {
         bitmap = new StaticGameBitmap(resId, rect.left, rect.top, rect.right, rect.bottom);
@@ -30,8 +31,34 @@ public class MovingButtonObject implements GameObject {
         pressed = false;
     }
 
-    public void pressOn(float x, float y) {
+    public void pressOn(float x, float y, boolean down) {
+        if (down) {
+            pressed = false;
+            if(IsIn(x, y)) {
+                pressed = true;
+            }
+        }
+        else {
+            pressed = false;
+            if(IsIn(x, y)) {
+                used = true;
+            }
+        }
+    }
 
+    private boolean IsIn(float x, float y) {
+        int hw = bitmap.getWidth() / 2;
+        int hh = bitmap.getHeight() / 2;
+        if ( (this.x - hw) < x && x < (this.x + hw)) {
+            if ( (this.y - hh) < y && y < (this.y + hh)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean IsUsed() {
+        return used;
     }
 
     public void update() {

@@ -58,6 +58,9 @@ public class MainMenuState {
         for (GameObject o : objects) {
             o.update();
         }
+        if (startButton.IsUsed()) {
+            clear();
+        }
     }
 
     public void draw(Canvas canvas){
@@ -68,7 +71,12 @@ public class MainMenuState {
 
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN) {
+        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+            startButton.pressOn(event.getX(), event.getY(), true);
+            return true;
+        }
+        else if (action == MotionEvent.ACTION_UP) {
+            startButton.pressOn(event.getX(), event.getY(), false);
             return true;
         }
         return false;
@@ -83,6 +91,15 @@ public class MainMenuState {
             @Override
             public void run() {
                 objects.remove(gameObject);
+            }
+        });
+    }
+
+    public void clear() {
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.clear();
             }
         });
     }

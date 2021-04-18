@@ -43,9 +43,9 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
     }
 
     public int getWidth() {
-        return this.imageWidth * PIXEL_SIZE;
+        return (right - left) * PIXEL_SIZE;
     }
     public int getHeight() {
-        return this.imageHeight * PIXEL_SIZE;
+        return (bottom - top) * PIXEL_SIZE;
     }
 }
