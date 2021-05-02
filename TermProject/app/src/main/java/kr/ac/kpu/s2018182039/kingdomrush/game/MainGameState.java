@@ -39,6 +39,7 @@ public class MainGameState {
                 w/2, h/2, 160, 175, 420, 320, 8);
 
         objects.add(background);
+        objects.add(new EnemyGenerator());
         initialized = true;
         return true;
     }
@@ -67,7 +68,13 @@ public class MainGameState {
     }
 
     public void add(GameObject gameObject) {
-        objects.add(gameObject);
+        GameView.view.post(new Runnable() {
+            @Override
+            public void run() {
+                objects.add(gameObject);
+                //Log.d(TAG, "<R> object count = " + objects.size());
+            }
+        });
     }
 
     public void remove(GameObject gameObject) {
