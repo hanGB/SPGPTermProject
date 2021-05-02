@@ -8,7 +8,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.ui.view.GameView;
 
 public class EnemyGenerator implements GameObject {
-    private static final float INITIAL_SPAWN_INTERVAL = 1.0f;
+    private static final float INITIAL_SPAWN_INTERVAL = 2.0f;
     private float time;
     private float spawnInterval;
     private int wave;
@@ -32,7 +32,7 @@ public class EnemyGenerator implements GameObject {
     private void generate() {
         wave++;
         MainGameState state = MainGameState.get();
-        EnemyObject enemy = new EnemyObject(300 + wave * 30, 300 + wave * 30);
+        EnemyObject enemy = new EnemyObject(300, 300);
         state.add(enemy);
     }
 
