@@ -10,6 +10,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import kr.ac.kpu.s2018182039.kingdomrush.framework.Sound;
+import kr.ac.kpu.s2018182039.kingdomrush.game.MainGameState;
 import kr.ac.kpu.s2018182039.kingdomrush.game.MainMenuState;
 import kr.ac.kpu.s2018182039.kingdomrush.game.StageSelectState;
 
@@ -42,10 +43,14 @@ public class GameView extends View {
             MainMenuState state = MainMenuState.get();
             state.update();
             if (state.staring) {
-                stateNumber = 1;
+//                stateNumber = 1;
 
-                StageSelectState state1 = StageSelectState.get();
-                state1.initResources();
+//                StageSelectState state1 = StageSelectState.get();
+//                state1.initResources();
+                stateNumber = 2;
+
+                MainGameState state2 = MainGameState.get();
+                state2.initResources();
             }
         }
         else if (stateNumber == 1) {
@@ -53,7 +58,7 @@ public class GameView extends View {
             state.update();
         }
         else {
-            MainMenuState state = MainMenuState.get();
+            MainGameState state = MainGameState.get();
             state.update();
         }
         invalidate();
@@ -75,7 +80,7 @@ public class GameView extends View {
                     state.frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 }
                 else {
-                    MainMenuState state = MainMenuState.get();
+                    MainGameState state = MainGameState.get();
                     state.frameTime = (float) (time - lastFrame) / 1_000_000_000;
                 }
                 update();
@@ -96,7 +101,7 @@ public class GameView extends View {
             state.draw(canvas);
         }
         else {
-            MainMenuState state = MainMenuState.get();
+            MainGameState state = MainGameState.get();
             state.draw(canvas);
         }
     }
