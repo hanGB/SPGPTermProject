@@ -117,7 +117,7 @@ public class GameView extends View {
             return state.onTouchEvent(event);
         }
         else {
-            MainMenuState state = MainMenuState.get();
+            MainGameState state =   MainGameState.get();
             return state.onTouchEvent(event);
         }
     }

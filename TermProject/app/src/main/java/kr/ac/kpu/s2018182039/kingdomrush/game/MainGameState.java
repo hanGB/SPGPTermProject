@@ -46,7 +46,7 @@ public class MainGameState {
     private boolean initialized;
 
     public enum Layer {
-        bg, enemy, tower, bullet, controller, LAYER_COUNT
+        bg, enemy, tower, towerBuilder, bullet, controller, LAYER_COUNT
     }
 
     private void initLayers(int layerCount) {
@@ -72,7 +72,8 @@ public class MainGameState {
 
         add(Layer.bg, background);
         add(Layer.controller, new EnemyGenerator());
-        add(Layer.tower, new TowerObject(300, 300, 0));
+        //add(Layer.tower, new TowerObject(300, 300, 0));
+        add(Layer.towerBuilder, new TowerBuilder(300, 300));
         initialized = true;
         return true;
     }
@@ -95,9 +96,18 @@ public class MainGameState {
 
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
+        ArrayList<GameObject> towerBuilders = layers.get(Layer.towerBuilder.ordinal());
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+            for (GameObject o  : towerBuilders){
+                TowerBuilder builder = (TowerBuilder)o;
+                builder.pressOn(event.getX(), event.getY(), true);
+            }
             return true;
         } else if (action == MotionEvent.ACTION_UP) {
+            for (GameObject o  : towerBuilders){
+                TowerBuilder builder = (TowerBuilder)o;
+                builder.pressOn(event.getX(), event.getY(), false);
+            }
             return true;
         }
         return false;
