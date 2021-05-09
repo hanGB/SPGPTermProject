@@ -33,7 +33,7 @@ public class EnemyGenerator implements GameObject {
         wave++;
         MainGameState state = MainGameState.get();
         EnemyObject enemy = new EnemyObject(300, 300);
-        state.add(enemy);
+        state.add(MainGameState.Layer.enemy, enemy);
     }
 
     @Override
