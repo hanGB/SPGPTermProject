@@ -16,7 +16,6 @@ public class TowerBuilder implements GameObject {
     private final float x;
     private final float y;
     private boolean isOn = false;
-    private int checkedButton = 0;
 
     public TowerBuilder(float x, float y) {
         this.x = x;
@@ -44,6 +43,22 @@ public class TowerBuilder implements GameObject {
 
     public void pressOn(float x, float y, boolean down) {
         if (down) {
+            if (isOn) {
+                MainGameState state = MainGameState.get();
+                if (IsInButton(x, y, -150, -150)){
+                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 0));
+                    state.remove(this, true);
+                } else if (IsInButton(x, y, 150, -150)) {
+                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 1));
+                    state.remove(this, true);
+                } else if (IsInButton(x, y, -150, 150)) {
+                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 2));
+                    state.remove(this, true);
+                } else if (IsInButton(x, y, 150, 150)) {
+                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 3));
+                    state.remove(this, true);
+                }
+            }
             isOn = IsIn(x, y);
         }
     }
@@ -53,6 +68,17 @@ public class TowerBuilder implements GameObject {
         int hh = slotBitmap.getHeight() / 2;
         if ( (this.x - hw) < x && x < (this.x + hw)) {
             if ( (this.y - hh) < y && y < (this.y + hh)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean IsInButton(float x, float y, float locationX, float locationY) {
+        int hw = buttonBitmap.getWidth() / 2;
+        int hh = buttonBitmap.getHeight() / 2;
+        if ( (this.x + locationX- hw) < x && x < (this.x + locationX + hw)) {
+            if ( (this.y + locationY- hh) < y && y < (this.y + locationY+ hh)) {
                 return true;
             }
         }

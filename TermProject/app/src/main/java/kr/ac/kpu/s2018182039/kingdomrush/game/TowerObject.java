@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
-import kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.StaticGameBitmap;
 

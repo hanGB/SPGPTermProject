@@ -72,8 +72,10 @@ public class MainGameState {
 
         add(Layer.bg, background);
         add(Layer.controller, new EnemyGenerator());
-        //add(Layer.tower, new TowerObject(300, 300, 0));
-        add(Layer.towerBuilder, new TowerBuilder(300, 300));
+        add(Layer.towerBuilder, new TowerBuilder(600, 600));
+        add(Layer.towerBuilder, new TowerBuilder(1000, 300));
+        add(Layer.towerBuilder, new TowerBuilder(1400, 600));
+
         initialized = true;
         return true;
     }
