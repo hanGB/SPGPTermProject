@@ -40,6 +40,7 @@ public class MainGameState {
 
         objects.add(background);
         objects.add(new EnemyGenerator());
+        objects.add(new TowerObject(300, 300, 0));
         initialized = true;
         return true;
     }

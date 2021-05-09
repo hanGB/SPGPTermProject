@@ -31,6 +31,18 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
         this.pixel_size = pixel_size;
     }
 
+    public StaticGameBitmap(int resId, int pixel_size) {
+        bitmap = kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap.load(resId);
+        imageWidth = bitmap.getWidth();
+        imageHeight = bitmap.getHeight();
+        this.left = 0;
+        this.top = 0;
+        this.right = imageWidth;
+        this.bottom = imageHeight;
+        this.pixel_size = pixel_size;
+    }
+
+
     public void draw(Canvas canvas, float x, float y) {
         int w = right - left;
         int h = bottom - top;
