@@ -42,6 +42,9 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
         this.pixel_size = pixel_size;
     }
 
+    public void changeImage(int resId) {
+        bitmap = kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap.load(resId);
+    }
 
     public void draw(Canvas canvas, float x, float y) {
         int w = right - left;
@@ -60,5 +63,17 @@ public class StaticGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framewor
     }
     public int getHeight() {
         return (bottom - top) * pixel_size;
+    }
+
+    public void getBoundingRect(float x, float y, RectF rect) {
+        int hw = getWidth() / 2;
+        int hh = getHeight() / 2;
+
+        float dl = x - hw * pixel_size;
+        float dt = y - hh * pixel_size;
+        float dr = x + hw * pixel_size;
+        float db = y + hh * pixel_size;
+
+        rect.set(dl, dt, dr, db);
     }
 }

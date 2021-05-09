@@ -8,6 +8,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.StaticGameBitmap;
 
 public class TowerObject implements GameObject {
+
     private final int[] tower = {
             R.mipmap.archer_tower,
             R.mipmap.magic_tower,
@@ -33,6 +34,7 @@ public class TowerObject implements GameObject {
     public void update() {
 
     }
+
 
     @Override
     public void draw(Canvas canvas) {

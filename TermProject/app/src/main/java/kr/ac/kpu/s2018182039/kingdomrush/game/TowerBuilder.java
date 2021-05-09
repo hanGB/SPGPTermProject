@@ -46,7 +46,7 @@ public class TowerBuilder implements GameObject {
             if (isOn) {
                 MainGameState state = MainGameState.get();
                 if (IsInButton(x, y, -150, -150)){
-                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 0));
+                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, 150, -150)) {
                     state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 1));
