@@ -5,6 +5,8 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
+import kr.ac.kpu.s2018182039.kingdomrush.ui.view.GameView;
+
 public class AnimationGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap {
     private static final int PIXEL_SIZE = 4;
     private Bitmap bitmap;
@@ -52,5 +54,17 @@ public class AnimationGameBitmap extends kr.ac.kpu.s2018182039.kingdomrush.frame
     }
     public int getHeight() {
         return this.imageHeight * PIXEL_SIZE;
+    }
+
+    public void getBoundingRect(float x, float y, RectF rect) {
+        int hw = getWidth() / 2;
+        int hh = getHeight() / 2;
+
+        float dl = x - hw;
+        float dt = y - hh;
+        float dr = x + hw;
+        float db = y + hh;
+
+        rect.set(dl, dt, dr, db);
     }
 }

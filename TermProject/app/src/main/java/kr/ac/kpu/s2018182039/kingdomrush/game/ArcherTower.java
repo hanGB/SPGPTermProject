@@ -53,6 +53,9 @@ public class ArcherTower extends TowerObject {
             this.y - range > targetEnemy.y || targetEnemy.y > this.y + range) {
                 targetSetEnd = false;
             }
+            if (targetEnemy.hp <= 0){
+                targetSetEnd = false;
+            }
         }
     }
 
@@ -63,7 +66,7 @@ public class ArcherTower extends TowerObject {
 
         float dis = (float)Math.sqrt(dx * dx + dy * dy);
 
-        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED);
+        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 8);
         MainGameState state = MainGameState.get();
         state.add(MainGameState.Layer.bullet, bullet);
     }

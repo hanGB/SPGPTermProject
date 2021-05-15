@@ -19,34 +19,38 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private RectF boundingRect = new RectF();
     private float dx;
     private float dy;
+    public int damage;
 
-    private Bullet(int resId, float x, float y, float dx, float dy, int speed) {
+    private Bullet(int resId, float x, float y, float dx, float dy, int speed, int damage) {
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
 
+        this.damage = damage;
+
         this.bitmap = new StaticGameBitmap(resId, 2);
     }
 
-    public static Bullet get(int resId, float x, float y, float dx, float dy, int speed) {
+    public static Bullet get(int resId, float x, float y, float dx, float dy, int speed, int damage) {
         MainGameState state = MainGameState.get();
         Bullet bullet = (Bullet)state.get(Bullet.class);
         if (bullet == null) {
-            return new Bullet(resId, x, y, dx, dy, speed);
+            return new Bullet(resId, x, y, dx, dy, speed, damage);
         }
-        bullet.init(resId, x, y, dx, dy, speed);
+        bullet.init(resId, x, y, dx, dy, speed, damage);
         return bullet;
     }
 
-    private void init(int resId, float x, float y, float dx, float dy, int speed) {
+    private void init(int resId, float x, float y, float dx, float dy, int speed, int damage) {
         this.bitmap.changeImage(resId);
         this.x = x;
         this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.speed = speed;
+        this.damage = damage;
     }
 
     @Override

@@ -68,4 +68,16 @@ public class AnimationGameBitmapVertical {
     public int getHeight() {
         return this.frameHeight * PIXEL_SIZE;
     }
+
+    public void getBoundingRect(float x, float y, RectF rect) {
+        int hw = getWidth() / 2;
+        int hh = getHeight() / 2;
+
+        float dl = x - hw;
+        float dt = y - hh;
+        float dr = x + hw;
+        float db = y + hh;
+
+        rect.set(dl, dt, dr, db);
+    }
 }

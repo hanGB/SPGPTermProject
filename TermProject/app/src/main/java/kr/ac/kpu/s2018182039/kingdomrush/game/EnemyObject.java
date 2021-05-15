@@ -1,14 +1,18 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game;
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.AnimationGameBitmap;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.BoxCollidable;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 
-public class EnemyObject implements GameObject {
+public class EnemyObject implements GameObject, BoxCollidable {
     private static final int MOVE = 0;
     private static final int ATTACK = 1;
+
+    private RectF boundingRect = new RectF();
 
     private float[] movePoints = {
             200, 200,
@@ -44,6 +48,7 @@ public class EnemyObject implements GameObject {
     public float x;
     public float y;
     private int action;
+    public int hp;
 
     public EnemyObject(float x, float y) {
         moveBitmap = new AnimationGameBitmap(R.mipmap.enemy_move, 5, 5);
@@ -53,6 +58,8 @@ public class EnemyObject implements GameObject {
         this.y = y;
         targetX = movePoints[0];
         targetY = movePoints[1];
+
+        hp = 20;
 
         action = MOVE;
     }
@@ -98,5 +105,19 @@ public class EnemyObject implements GameObject {
         else if (action == ATTACK) {
             attackBitmap.draw(canvas, x, y);
         }
+    }
+
+    public boolean giveDamage(int damage) {
+        hp -= damage;
+        if (hp <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public RectF getBoundingRect() {
+        moveBitmap.getBoundingRect(x, y, boundingRect);
+        return boundingRect;
     }
 }

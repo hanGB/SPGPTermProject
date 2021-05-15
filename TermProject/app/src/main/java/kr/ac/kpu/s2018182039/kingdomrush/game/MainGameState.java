@@ -11,6 +11,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.Recyclable;
 import kr.ac.kpu.s2018182039.kingdomrush.ui.view.GameView;
+import kr.ac.kpu.s2018182039.kingdomrush.utils.CollisionHelper;
 
 public class MainGameState {
 
@@ -84,6 +85,28 @@ public class MainGameState {
         for (ArrayList<GameObject> objects : layers) {
             for (GameObject o : objects) {
                 o.update();
+            }
+        }
+
+        ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
+        ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
+
+        for (GameObject o1 : enemies) {
+            EnemyObject enemy = (EnemyObject)o1;
+            boolean collided = false;
+            for (GameObject o2 : bullets){
+                Bullet bullet = (Bullet) o2;
+                if (CollisionHelper.collides(enemy, bullet)) {
+                    if (enemy.giveDamage(bullet.damage)) {
+                        remove(enemy, false);
+                    }
+                    remove(bullet, false);
+                    collided = true;
+                    break;
+                }
+            }
+            if (collided) {
+                break;
             }
         }
     }
