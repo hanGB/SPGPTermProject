@@ -9,7 +9,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.StaticGameBitmap;
 
 public class TowerBuilder implements GameObject {
     private final AnimationGameBitmapVertical buttonBitmap
-            = new AnimationGameBitmapVertical(R.mipmap.gui_tower, 0, 10);
+            = new AnimationGameBitmapVertical(R.mipmap.gui_tower, 0, 10, 2);
     private final StaticGameBitmap guiBitmap;
     private final StaticGameBitmap slotBitmap;
 
@@ -49,13 +49,13 @@ public class TowerBuilder implements GameObject {
                     state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, 150, -150)) {
-                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
+                    state.add(MainGameState.Layer.tower, new SoldierTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, -150, 150)) {
-                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
+                    state.add(MainGameState.Layer.tower, new MagicTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, 150, 150)) {
-                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
+                    state.add(MainGameState.Layer.tower, new BombTower(this.x, this.y));
                     state.remove(this, true);
                 }
             }

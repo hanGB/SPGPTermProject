@@ -6,7 +6,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 
 public class AnimationGameBitmapVertical {
-    private static final int PIXEL_SIZE = 2;
+    private final int PIXEL_SIZE;
     private Bitmap bitmap;
     private final int imageWidth;
     private final int imageHeight;
@@ -16,7 +16,7 @@ public class AnimationGameBitmapVertical {
     private final int frameCount;
     private int frameIndex;
 
-    public AnimationGameBitmapVertical(int resId, float framePerSecond, int frameCount) {
+    public AnimationGameBitmapVertical(int resId, float framePerSecond, int frameCount, int pixel_size) {
         bitmap = kr.ac.kpu.s2018182039.kingdomrush.framework.GameBitmap.load(resId);
         imageWidth = bitmap.getWidth();
         imageHeight = bitmap.getHeight();
@@ -30,6 +30,8 @@ public class AnimationGameBitmapVertical {
         createOn = System.currentTimeMillis();
         frameIndex = 0;
         this.framePerSecond = framePerSecond;
+
+        PIXEL_SIZE = pixel_size;
     }
 
     public void draw(Canvas canvas, float x, float y) {
