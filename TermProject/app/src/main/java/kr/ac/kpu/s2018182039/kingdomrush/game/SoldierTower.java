@@ -64,8 +64,8 @@ public class SoldierTower implements GameObject {
     private void spawnSolider() {
         float dx = 1.0f;
         float dy = 1.0f;
-        Bullet bullet = Bullet.get(R.mipmap.ball, this.x, this.y, dx, dy, BULLET_SPEED);
         MainGameState state = MainGameState.get();
-        state.add(MainGameState.Layer.bullet, bullet);
+        SoldierObject solider = new SoldierObject(x, y);
+        state.add(MainGameState.Layer.friendly, solider);
     }
 }

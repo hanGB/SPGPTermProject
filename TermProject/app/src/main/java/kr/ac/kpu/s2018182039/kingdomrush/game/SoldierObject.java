@@ -4,14 +4,15 @@ import android.graphics.Canvas;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.AnimationGameBitmap;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.AnimationGameBitmapVertical;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 
-public class EnemyObject implements GameObject {
+public class SoldierObject implements GameObject {
     private static final int MOVE = 0;
     private static final int ATTACK = 1;
 
-    private final AnimationGameBitmap moveBitmap;
-    private final AnimationGameBitmap attackBitmap;
+    private final AnimationGameBitmapVertical moveBitmap;
+    private final AnimationGameBitmapVertical attackBitmap;
 
     private float targetX = 600;
     private float targetY = 600;
@@ -21,9 +22,9 @@ public class EnemyObject implements GameObject {
     private float y;
     private int action;
 
-    public EnemyObject(float x, float y) {
-        moveBitmap = new AnimationGameBitmap(R.mipmap.enemy_move, 5, 5);
-        attackBitmap = new AnimationGameBitmap(R.mipmap.enemy_attack, 3, 2);
+    public SoldierObject(float x, float y) {
+        moveBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_move, 5, 2, 4);
+        attackBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_attack, 3, 2, 4);
 
         this.x = x;
         this.y = y;

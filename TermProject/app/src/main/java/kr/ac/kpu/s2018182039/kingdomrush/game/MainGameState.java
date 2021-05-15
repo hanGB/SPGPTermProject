@@ -46,7 +46,7 @@ public class MainGameState {
     private boolean initialized;
 
     public enum Layer {
-        bg, enemy, tower, towerBuilder, bullet, controller, LAYER_COUNT
+        bg, tower, enemy, friendly, towerBuilder, bullet, controller, LAYER_COUNT
     }
 
     private void initLayers(int layerCount) {
