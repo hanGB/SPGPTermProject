@@ -15,6 +15,9 @@ public class SoldierTower implements GameObject {
     private final float x;
     private final float y;
 
+    private float gatheringPlaceX;
+    private float gatheringPlaceY;
+
     private float spawnTime;
     private boolean isSpawning = false;
     private boolean isSpawnSoldier = false;
@@ -22,6 +25,9 @@ public class SoldierTower implements GameObject {
     SoldierTower(float x, float y) {
         this.x = x;
         this.y = y;
+
+        gatheringPlaceX = x + 200;
+        gatheringPlaceY = y + 200;
         spawnTime = SPAWN_INTERVAL;
         towerBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_tower, 0, 2, 4);
     }
@@ -65,7 +71,7 @@ public class SoldierTower implements GameObject {
         float dx = 1.0f;
         float dy = 1.0f;
         MainGameState state = MainGameState.get();
-        SoldierObject solider = new SoldierObject(x, y);
+        SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY);
         state.add(MainGameState.Layer.friendly, solider);
     }
 }

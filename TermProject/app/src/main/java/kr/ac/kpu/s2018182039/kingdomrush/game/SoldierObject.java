@@ -14,17 +14,25 @@ public class SoldierObject implements GameObject {
     private final AnimationGameBitmapVertical moveBitmap;
     private final AnimationGameBitmapVertical attackBitmap;
 
-    private float targetX = 600;
-    private float targetY = 600;
+    private float targetX;
+    private float targetY;
     private float speed = 50;
 
     private float x;
     private float y;
+    private float locationX;
+    private float locationY ;
+
     private int action;
 
-    public SoldierObject(float x, float y) {
+    public SoldierObject(float x, float y, float locationX, float locationY) {
         moveBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_move, 5, 2, 4);
         attackBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_attack, 3, 2, 4);
+
+        this.locationX = locationX;
+        this.locationY = locationY;
+        targetX = locationX;
+        targetY = locationY;
 
         this.x = x;
         this.y = y;
@@ -40,7 +48,7 @@ public class SoldierObject implements GameObject {
 
         if (targetX - 10 < x && targetX + 10 > x){
             if (targetY - 10 < y && targetY + 10 > y) {
-                action = ATTACK;
+                //action = ATTACK;
                 return;
             }
         }

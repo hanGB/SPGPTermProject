@@ -148,4 +148,9 @@ public class MainGameState {
             runnable.run();
         }
     }
+
+    public ArrayList<GameObject> getAllObjects(Layer layer) {
+        ArrayList<GameObject> objects = layers.get(layer.ordinal());
+        return objects;
+    }
 }

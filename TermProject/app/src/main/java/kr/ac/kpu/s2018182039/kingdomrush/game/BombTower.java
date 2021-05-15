@@ -3,8 +3,8 @@ package kr.ac.kpu.s2018182039.kingdomrush.game;
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 
 public class BombTower extends TowerObject {
-    private static final int BULLET_SPEED = 1500;
-    private static final float FIRE_INTERVAL = 1.0f;
+    private static final int BULLET_SPEED = 500;
+    private static final float FIRE_INTERVAL = 2.0f;
 
     private float fireTime;
 
@@ -28,8 +28,8 @@ public class BombTower extends TowerObject {
 
     private void fireBullet() {
         float dx = 1.0f;
-        float dy = 1.0f;
-        Bullet bullet = Bullet.get(R.mipmap.bomb, this.x, this.y, dx, dy, BULLET_SPEED);
+        float dy = -1.0f;
+        BombBullet bullet = BombBullet.get(R.mipmap.bomb, this.x, this.y - 100, dx, dy, BULLET_SPEED);
         MainGameState state = MainGameState.get();
         state.add(MainGameState.Layer.bullet, bullet);
     }
