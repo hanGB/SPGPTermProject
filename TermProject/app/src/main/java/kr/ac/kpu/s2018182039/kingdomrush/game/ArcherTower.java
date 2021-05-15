@@ -6,20 +6,14 @@ import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.StaticGameBitmap;
 
-public class ArcherTower implements GameObject {
+public class ArcherTower extends TowerObject {
     private static final int BULLET_SPEED = 1500;
     private static final float FIRE_INTERVAL = 1.0f;
-
-    private final StaticGameBitmap towerBitmap = new StaticGameBitmap(R.mipmap.archer_tower, 4);
-
-    private final float x;
-    private final float y;
 
     private float fireTime;
 
     ArcherTower(float x, float y) {
-        this.x = x;
-        this.y = y;
+        super(x, y, R.mipmap.archer_tower);
         fireTime = FIRE_INTERVAL;
     }
 
@@ -42,10 +36,5 @@ public class ArcherTower implements GameObject {
         Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx, dy, BULLET_SPEED);
         MainGameState state = MainGameState.get();
         state.add(MainGameState.Layer.bullet, bullet);
-    }
-
-    @Override
-    public void draw(Canvas canvas) {
-        towerBitmap.draw(canvas, x, y);
     }
 }

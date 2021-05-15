@@ -49,13 +49,13 @@ public class TowerBuilder implements GameObject {
                     state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, 150, -150)) {
-                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 1));
+                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, -150, 150)) {
-                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 2));
+                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 } else if (IsInButton(x, y, 150, 150)) {
-                    state.add(MainGameState.Layer.tower, new TowerObject(this.x, this.y, 3));
+                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
                     state.remove(this, true);
                 }
             }
