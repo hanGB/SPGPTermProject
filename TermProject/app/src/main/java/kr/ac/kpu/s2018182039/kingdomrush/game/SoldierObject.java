@@ -22,10 +22,11 @@ public class SoldierObject implements GameObject {
     private float y;
     private float locationX;
     private float locationY ;
+    public int towerId;
 
     private int action;
 
-    public SoldierObject(float x, float y, float locationX, float locationY) {
+    public SoldierObject(float x, float y, float locationX, float locationY, int towerId) {
         moveBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_move, 5, 2, 4);
         attackBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_attack, 3, 2, 4);
 
@@ -36,6 +37,8 @@ public class SoldierObject implements GameObject {
 
         this.x = x;
         this.y = y;
+
+        this.towerId = towerId;
 
         action = MOVE;
     }

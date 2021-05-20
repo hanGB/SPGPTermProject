@@ -122,16 +122,26 @@ public class MainGameState {
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
         ArrayList<GameObject> towerBuilders = layers.get(Layer.towerBuilder.ordinal());
+        ArrayList<GameObject> towers = layers.get(Layer.tower.ordinal());
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
             for (GameObject o  : towerBuilders){
                 TowerBuilder builder = (TowerBuilder)o;
                 builder.pressOn(event.getX(), event.getY(), true);
             }
+            for (GameObject o  : towers){
+                TowerObject tower = (TowerObject)o;
+                tower.pressOn(event.getX(), event.getY(), true);
+            }
+
             return true;
         } else if (action == MotionEvent.ACTION_UP) {
             for (GameObject o  : towerBuilders){
                 TowerBuilder builder = (TowerBuilder)o;
                 builder.pressOn(event.getX(), event.getY(), false);
+            }
+            for (GameObject o  : towers){
+                TowerObject tower = (TowerObject)o;
+                tower.pressOn(event.getX(), event.getY(), false);
             }
             return true;
         }
