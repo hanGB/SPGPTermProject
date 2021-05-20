@@ -79,7 +79,7 @@ public class SoldierTower extends TowerObject {
 
 
         if (!isSpawning) {
-            frameIndex = 0;
+            frameIndex = 1;
         } else {
             if (spawnTime < SPAWN_INTERVAL / 2) {
                 frameIndex = 0;
