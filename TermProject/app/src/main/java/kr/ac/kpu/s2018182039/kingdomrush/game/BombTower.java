@@ -31,6 +31,6 @@ public class BombTower extends TowerObject {
         float dy = -1.0f;
         BombBullet bullet = BombBullet.get(R.mipmap.bomb, this.x, this.y - 100, dx, dy, BULLET_SPEED);
         MainGameState state = MainGameState.get();
-        state.add(MainGameState.Layer.bullet, bullet);
+        state.add(MainGameState.Layer.bomb, bullet);
     }
 }
