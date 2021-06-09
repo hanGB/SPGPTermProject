@@ -3,9 +3,10 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainMenuState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class MovingButtonObject implements GameObject {
     private float x, y;
@@ -13,7 +14,6 @@ public class MovingButtonObject implements GameObject {
     private final StaticGameBitmap bitmap;
     private final StaticGameBitmap bitmapPressed;
     private boolean pressed;
-    private boolean used;
     private float distanceX;
     private float distanceY;
     private float speed = 2.f;
@@ -42,7 +42,8 @@ public class MovingButtonObject implements GameObject {
         else {
             pressed = false;
             if(IsIn(x, y)) {
-                used = true;
+                BaseGame game = BaseGame.get();
+                game.push(new MainScene());
             }
         }
     }
@@ -58,14 +59,10 @@ public class MovingButtonObject implements GameObject {
         return false;
     }
 
-    public boolean IsUsed() {
-        return used;
-    }
-
     public void update() {
-        MainMenuState state = MainMenuState.get();
-        x += (distanceX * speed * state.frameTime);
-        y += (distanceY * speed * state.frameTime);
+        BaseGame game = BaseGame.get();
+        x += (distanceX * speed * game.frameTime);
+        y += (distanceY * speed * game.frameTime);
         if ((distanceX > 0 && x > dx) || (distanceX < 0 && x < dx)) {
             x = dx;
         }

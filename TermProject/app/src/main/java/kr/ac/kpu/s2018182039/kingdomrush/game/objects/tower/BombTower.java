@@ -1,8 +1,9 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.BombBullet;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class BombTower extends TowerObject {
     private static final int BULLET_SPEED = 500;
@@ -17,9 +18,9 @@ public class BombTower extends TowerObject {
 
     @Override
     public void update() {
-        MainGameState state = MainGameState.get();
+        BaseGame game = BaseGame.get();
 
-        fireTime += state.frameTime;
+        fireTime += game.frameTime;
         if (fireTime >= FIRE_INTERVAL) {
             fireBullet();
             fireTime -= FIRE_INTERVAL;
@@ -32,7 +33,7 @@ public class BombTower extends TowerObject {
         float dx = 1.0f;
         float dy = -1.0f;
         BombBullet bullet = BombBullet.get(R.mipmap.bomb, this.x, this.y - 100, dx, dy, BULLET_SPEED);
-        MainGameState state = MainGameState.get();
-        state.add(MainGameState.Layer.bomb, bullet);
+        BaseGame game = BaseGame.get();
+        game.add(MainScene.Layer.bomb.ordinal(), bullet);
     }
 }

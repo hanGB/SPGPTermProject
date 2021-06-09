@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVertical;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
 
 public class TowerObject implements GameObject {
     private final StaticGameBitmap towerBitmap;
@@ -66,7 +66,7 @@ public class TowerObject implements GameObject {
     public void pressOn(float x, float y, boolean down) {
         if (down) {
             if (isOn) {
-                MainGameState state = MainGameState.get();
+                BaseGame game = BaseGame.get();
                 if (IsInButton(x, y, 0, -200)) {
                     upgrade();
                 }

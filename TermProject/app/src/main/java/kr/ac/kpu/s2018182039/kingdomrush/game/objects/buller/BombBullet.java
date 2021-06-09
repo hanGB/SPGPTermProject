@@ -3,12 +3,12 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller;
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.BoxCollidable;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.Recyclable;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
 
 public class BombBullet implements GameObject, BoxCollidable, Recyclable {
     private static final float GRAVITY = 4.8f;
@@ -31,8 +31,8 @@ public class BombBullet implements GameObject, BoxCollidable, Recyclable {
     }
 
     public static BombBullet get(int resId, float x, float y, float dx, float dy, int speed) {
-        MainGameState state = MainGameState.get();
-        BombBullet bullet = (BombBullet)state.get(BombBullet.class);
+        BaseGame game = BaseGame.get();
+        BombBullet bullet = (BombBullet)game.get(BombBullet.class);
         if (bullet == null) {
             return new BombBullet(resId, x, y, dx, dy, speed);
         }
@@ -51,11 +51,11 @@ public class BombBullet implements GameObject, BoxCollidable, Recyclable {
 
     @Override
     public void update() {
-        MainGameState state = MainGameState.get();
-        x += speed * dx * state.frameTime;
-        y += speed * dy * state.frameTime;
+        BaseGame game = BaseGame.get();
+        x += speed * dx * game.frameTime;
+        y += speed * dy * game.frameTime;
 
-        dy += GRAVITY * state.frameTime;
+        dy += GRAVITY * game.frameTime;
 
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
@@ -69,7 +69,7 @@ public class BombBullet implements GameObject, BoxCollidable, Recyclable {
         }
 
         if (toBeDeleted) {
-            state.remove(this, true);
+            game.remove(this, true);
         }
     }
 

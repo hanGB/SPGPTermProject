@@ -4,9 +4,10 @@ import android.graphics.Canvas;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVertical;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class TowerBuilder implements GameObject {
     private final AnimationGameBitmapVertical buttonBitmap
@@ -45,19 +46,19 @@ public class TowerBuilder implements GameObject {
     public void pressOn(float x, float y, boolean down) {
         if (down) {
             if (isOn) {
-                MainGameState state = MainGameState.get();
+                BaseGame game = BaseGame.get();
                 if (IsInButton(x, y, -150, -150)){
-                    state.add(MainGameState.Layer.tower, new ArcherTower(this.x, this.y));
-                    state.remove(this, true);
+                    game.add(MainScene.Layer.tower.ordinal(), new ArcherTower(this.x, this.y));
+                    game.remove(this, true);
                 } else if (IsInButton(x, y, 150, -150)) {
-                    state.add(MainGameState.Layer.tower, new SoldierTower(this.x, this.y));
-                    state.remove(this, true);
+                    game.add(MainScene.Layer.tower.ordinal(), new SoldierTower(this.x, this.y));
+                    game.remove(this, true);
                 } else if (IsInButton(x, y, -150, 150)) {
-                    state.add(MainGameState.Layer.tower, new MagicTower(this.x, this.y));
-                    state.remove(this, true);
+                    game.add(MainScene.Layer.tower.ordinal(), new MagicTower(this.x, this.y));
+                    game.remove(this, true);
                 } else if (IsInButton(x, y, 150, 150)) {
-                    state.add(MainGameState.Layer.tower, new BombTower(this.x, this.y));
-                    state.remove(this, true);
+                    game.add(MainScene.Layer.tower.ordinal(), new BombTower(this.x, this.y));
+                    game.remove(this, true);
                 }
             }
             isOn = IsIn(x, y);

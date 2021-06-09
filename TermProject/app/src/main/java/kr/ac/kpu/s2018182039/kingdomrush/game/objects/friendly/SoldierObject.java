@@ -6,9 +6,10 @@ import java.util.ArrayList;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVertical;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class SoldierObject implements GameObject {
     private static final int MOVE = 0;
@@ -63,13 +64,13 @@ public class SoldierObject implements GameObject {
     @Override
     public void update() {
         if (hp <= 0){
-            MainGameState state = MainGameState.get();
-            state.remove(this, true);
+            BaseGame game = BaseGame.get();
+            game.remove(this, true);
         }
 
         if (action == ATTACK) {
-            MainGameState state = MainGameState.get();
-            attackTime += state.frameTime;
+            BaseGame game = BaseGame.get();
+            attackTime += game.frameTime;
 
             if (attackTime >= ATTACK_TIME) {
                 targetEnemy.giveDamage(damage);
@@ -92,8 +93,8 @@ public class SoldierObject implements GameObject {
         float delta_x = targetX - x;
         float delta_y = targetY - y;
         float angle = (float) Math.atan2(delta_y, delta_x);
-        MainGameState state = MainGameState.get();
-        float move_dist = speed * state.frameTime;
+        BaseGame game = BaseGame.get();
+        float move_dist = speed * game.frameTime;
         float dx = (float) (move_dist * Math.cos(angle));
         float dy = (float) (move_dist * Math.sin(angle));
 
@@ -108,7 +109,7 @@ public class SoldierObject implements GameObject {
 
 
         if (!targetSetEnd) {
-            ArrayList<GameObject> enemies = state.getAllObjects(MainGameState.Layer.enemy);
+            ArrayList<GameObject> enemies = game.getAllObjects(MainScene.Layer.enemy.ordinal());
             for (GameObject enemy : enemies) {
                 EnemyObject enemyObject = (EnemyObject) enemy;
                 float x = enemyObject.x;

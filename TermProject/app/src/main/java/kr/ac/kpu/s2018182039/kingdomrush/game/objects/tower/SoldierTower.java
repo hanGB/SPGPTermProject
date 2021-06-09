@@ -2,9 +2,10 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class SoldierTower extends TowerObject {
     private static final int BULLET_SPEED = 1500;
@@ -40,9 +41,9 @@ public class SoldierTower extends TowerObject {
 
     @Override
     public void update() {
-        MainGameState state = MainGameState.get();
+        BaseGame game = BaseGame.get();
 
-        ArrayList<GameObject> objects = state.getAllObjects(MainGameState.Layer.friendly);
+        ArrayList<GameObject> objects = game.getAllObjects(MainScene.Layer.friendly.ordinal());
 
         int count = 0;
         for (GameObject object : objects) {
@@ -59,7 +60,7 @@ public class SoldierTower extends TowerObject {
             return;
         }
 
-        spawnTime += state.frameTime;
+        spawnTime += game.frameTime;
         if (spawnTime >= SPAWN_INTERVAL) {
             isSpawning = true;
             isSpawnSoldier = false;
@@ -89,8 +90,8 @@ public class SoldierTower extends TowerObject {
     private void spawnSolider() {
         float dx = 1.0f;
         float dy = 1.0f;
-        MainGameState state = MainGameState.get();
+        BaseGame game = BaseGame.get();
         SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY, towerId);
-        state.add(MainGameState.Layer.friendly, solider);
+        game.add(MainScene.Layer.friendly.ordinal(), solider);
     }
 }

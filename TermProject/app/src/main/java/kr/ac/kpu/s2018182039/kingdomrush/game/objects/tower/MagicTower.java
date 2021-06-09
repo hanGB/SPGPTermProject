@@ -3,10 +3,12 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower;
 import java.util.ArrayList;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
+
 
 public class MagicTower extends TowerObject {
     private static final int BULLET_SPEED = 1500;
@@ -25,10 +27,10 @@ public class MagicTower extends TowerObject {
 
     @Override
     public void update() {
-        MainGameState state = MainGameState.get();
+        BaseGame game = BaseGame.get();
 
         if (!targetSetEnd) {
-            ArrayList<GameObject> enemies = state.getAllObjects(MainGameState.Layer.enemy);
+            ArrayList<GameObject> enemies = game.getAllObjects(MainScene.Layer.enemy.ordinal());
             for (GameObject enemy : enemies) {
                 EnemyObject enemyObject = (EnemyObject) enemy;
                 float x = enemyObject.x;
@@ -43,7 +45,7 @@ public class MagicTower extends TowerObject {
             }
         }
         else {
-            fireTime += state.frameTime;
+            fireTime += game.frameTime;
             if (fireTime >= FIRE_INTERVAL) {
                 fireBullet();
                 fireTime -= FIRE_INTERVAL;
@@ -67,7 +69,7 @@ public class MagicTower extends TowerObject {
         float dis = (float)Math.sqrt(dx * dx + dy * dy);
 
         Bullet bullet = Bullet.get(R.mipmap.ball, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 5);
-        MainGameState state = MainGameState.get();
-        state.add(MainGameState.Layer.bullet, bullet);
+        BaseGame game = BaseGame.get();
+        game.add(MainScene.Layer.bullet.ordinal(), bullet);
     }
 }

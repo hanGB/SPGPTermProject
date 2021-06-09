@@ -2,9 +2,10 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.control;
 
 import android.graphics.Canvas;
 
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.MainGameState;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class EnemyGenerator implements GameObject {
     private static final float INITIAL_SPAWN_INTERVAL = 2.0f;
@@ -20,8 +21,8 @@ public class EnemyGenerator implements GameObject {
 
     @Override
     public void update() {
-        MainGameState state = MainGameState.get();
-        time += state.frameTime;
+        BaseGame game = BaseGame.get();
+        time += game.frameTime;
         if (time >= spawnInterval) {
             generate();
             time -= spawnInterval;
@@ -30,9 +31,9 @@ public class EnemyGenerator implements GameObject {
 
     private void generate() {
         wave++;
-        MainGameState state = MainGameState.get();
+        BaseGame game = BaseGame.get();
         EnemyObject enemy = new EnemyObject(300, 300);
-        state.add(MainGameState.Layer.enemy, enemy);
+        game.add(MainScene.Layer.enemy.ordinal(), enemy);
     }
 
     @Override

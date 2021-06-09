@@ -2,9 +2,9 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui;
 
 import android.graphics.Canvas;
 
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.StageSelectState;
 
 public class MovingBackgroundObject implements GameObject {
     private float x, y;
@@ -44,10 +44,10 @@ public class MovingBackgroundObject implements GameObject {
     }
 
     public void update() {
-        StageSelectState state = StageSelectState.get();
+        BaseGame game = BaseGame.get();
         if (down) {
-            float dx = (moveX - prevX) * state.frameTime;
-            float dy = (moveY - prevY) * state.frameTime;
+            float dx = (moveX - prevX) * game.frameTime;
+            float dy = (moveY - prevY) * game.frameTime;
             x += dx;
             if ((dx > 0 && x < tx) || (dx < 0 && x > tx)) {
                 x = tx;
