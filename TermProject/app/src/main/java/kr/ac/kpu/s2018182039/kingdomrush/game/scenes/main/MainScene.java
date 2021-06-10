@@ -23,7 +23,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
 
 public class MainScene extends Scene {
     private EnemyMovementPointsData pointsData = new EnemyMovementPointsData();
-    public int stageId = 1;
+    public int stageId = 3;
 
     private int life;
 
@@ -36,7 +36,7 @@ public class MainScene extends Scene {
     private MovingBackgroundObject backgroundMap;
 
     public enum Layer {
-        bg, point, tower, enemy, friendly, towerBuilder, bullet, bomb, controller, LAYER_COUNT
+        bg,  tower, enemy, friendly, towerBuilder, bullet, bomb, point, controller, LAYER_COUNT
     }
     public static MainScene scene;
     public void add(Layer layer, GameObject obj) {
