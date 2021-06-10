@@ -1,6 +1,7 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;

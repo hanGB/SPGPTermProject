@@ -18,7 +18,9 @@ public class StageFlagObject extends ButtonObject {
     @Override
     public void processButton() {
         BaseGame game = BaseGame.get();
-        game.push(new StageMenuScene());
+        StageMenuScene scene = new StageMenuScene();
+        scene.stageNumber = stageId;
+        game.push(scene);
     }
 
     public void adjustLocationWithBackground(float x, float y) {

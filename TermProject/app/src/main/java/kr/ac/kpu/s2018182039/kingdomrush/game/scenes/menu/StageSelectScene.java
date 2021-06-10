@@ -42,11 +42,16 @@ public class StageSelectScene extends Scene {
         Rect rect = new Rect(0, 0, 100,120);
         Rect rectPressed = new Rect(0, 120, 100,240);
         StageFlagObject stage1Flag = new StageFlagObject(R.mipmap.flag, R.mipmap.flag,
-                w/2, h / 2, rect, rectPressed, 2, 1);
+                w * 1 / 9, h, rect, rectPressed, 2, 1);
         add(Layer.flag, stage1Flag);
         StageFlagObject stage2Flag = new StageFlagObject(R.mipmap.flag, R.mipmap.flag,
-                w/3, h / 3, rect, rectPressed, 2, 1);
+                w* 2/5, h * 2 / 5, rect, rectPressed, 2, 2);
         add(Layer.flag, stage2Flag);
+        StageFlagObject stage3Flag = new StageFlagObject(R.mipmap.flag, R.mipmap.flag,
+                w* 5/6, h / 5, rect, rectPressed, 2, 3);
+        add(Layer.flag, stage3Flag);
+
+
     }
 
     @Override
