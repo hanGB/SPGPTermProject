@@ -38,7 +38,7 @@ public class MainScene extends Scene {
     private BattleHUD battleHUD;
 
     public enum Layer {
-        bg,  tower, enemy, friendly, towerBuilder, bullet, bomb, point, controller, ui, LAYER_COUNT
+        bg,  tower, enemy, friendly, towerBuilder, bullet, bomb, point, point2, controller, ui, LAYER_COUNT
     }
     public static MainScene scene;
     public void add(Layer layer, GameObject obj) {
@@ -72,6 +72,13 @@ public class MainScene extends Scene {
         for (int i = 0; i < pointsData.movePoints[stageId - 1].length; i += 2) {
             add(Layer.point, new EnemyPathPoint(pointsData.movePoints[stageId - 1][i], pointsData.movePoints[stageId - 1][i + 1]));
         }
+
+        if (stageId > 1) {
+            for (int i = 0; i < pointsData.movePoints[stageId - 1 + 2].length; i += 2) {
+                add(Layer.point2, new EnemyPathPoint(pointsData.movePoints[stageId - 1 + 2][i], pointsData.movePoints[stageId - 1 + 2][i + 1]));
+            }
+        }
+
         battleHUD = new BattleHUD(w * 1/ 6, h * 1/ 6);
         add(Layer.ui, battleHUD);
 
@@ -159,7 +166,10 @@ public class MainScene extends Scene {
             EnemyPathPoint point = (EnemyPathPoint)o;
             point.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
         }
-
+        for (GameObject o : objectsAt(Layer.point2)) {
+            EnemyPathPoint point = (EnemyPathPoint)o;
+            point.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
         for (GameObject o : objectsAt(Layer.enemy)) {
             EnemyObject enemy = (EnemyObject)o;
             enemy.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);

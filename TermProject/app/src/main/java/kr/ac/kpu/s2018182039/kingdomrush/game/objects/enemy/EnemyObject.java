@@ -41,19 +41,27 @@ public class EnemyObject implements GameObject, BoxCollidable {
     private float attackRange = 50.0f;
     private int damage;
     private int pointSize;
+    private boolean secondLine;
 
     private float attackTime = 0.0f;
 
-    public EnemyObject(float x, float y, int hp, int damage) {
+    public EnemyObject(float x, float y, int hp, int damage, boolean secondLine) {
         moveBitmap = new AnimationGameBitmap(R.mipmap.enemy_move, 5, 5);
         attackBitmap = new AnimationGameBitmap(R.mipmap.enemy_attack, 3, 2);
 
+        this.secondLine = secondLine;
         nowPoint = 0;
 
         BaseGame game = BaseGame.get();
-        EnemyPathPoint point = (EnemyPathPoint)game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
-        pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
-
+        EnemyPathPoint point;
+        if (this.secondLine) {
+            point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).get(nowPoint);
+            pointSize = game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).size();
+        }
+        else {
+            point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+            pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
+        }
         this.x = point.x;
         this.y = point.y;
         targetX = point.x;
@@ -103,7 +111,15 @@ public class EnemyObject implements GameObject, BoxCollidable {
                     scene.damageToLife(1);
                     return;
                 }
-                EnemyPathPoint point = (EnemyPathPoint)game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                EnemyPathPoint point;
+                if (this.secondLine) {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).size();
+                }
+                else {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
+                }
 
                 targetX = point.x;
                 targetY = point.y;
@@ -157,13 +173,29 @@ public class EnemyObject implements GameObject, BoxCollidable {
             if (targetSolider.x - range > this.x || this.x > targetSolider.x + range ||
                     targetSolider.y - range > this.y || this.y > targetSolider.y + range) {
                 targetSetEnd = false;
-                EnemyPathPoint point = (EnemyPathPoint)game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                EnemyPathPoint point;
+                if (this.secondLine) {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).size();
+                }
+                else {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
+                }
                 targetX = point.x;
                 targetY = point.y;
             }
             if (targetSolider.hp <= 0){
                 targetSetEnd = false;
-                EnemyPathPoint point = (EnemyPathPoint)game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                EnemyPathPoint point;
+                if (this.secondLine) {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).size();
+                }
+                else {
+                    point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                    pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
+                }
                 targetX = point.x;
                 targetY = point.y;
             }
@@ -201,7 +233,15 @@ public class EnemyObject implements GameObject, BoxCollidable {
         // 타겟 포인트 또한 업데이트
         if (nowPoint < pointSize) {
             BaseGame game = BaseGame.get();
-            EnemyPathPoint point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+            EnemyPathPoint point;
+            if (this.secondLine) {
+                point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).get(nowPoint);
+                pointSize = game.getTopScene().objectsAt(MainScene.Layer.point2.ordinal()).size();
+            }
+            else {
+                point = (EnemyPathPoint) game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).get(nowPoint);
+                pointSize = game.getTopScene().objectsAt(MainScene.Layer.point.ordinal()).size();
+            }
             targetX = point.x;
             targetY = point.y;
         }

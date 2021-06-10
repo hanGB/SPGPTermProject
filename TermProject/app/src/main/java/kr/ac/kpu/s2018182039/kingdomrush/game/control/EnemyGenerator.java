@@ -2,6 +2,8 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.control;
 
 import android.graphics.Canvas;
 
+import java.util.Random;
+
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
@@ -19,6 +21,7 @@ public class EnemyGenerator implements GameObject {
     private int hp;
     private int damage;
     private int generateCount;
+    private Random random = new Random();
 
     public EnemyGenerator(int stageId) {
         time = INITIAL_SPAWN_INTERVAL;
@@ -51,7 +54,18 @@ public class EnemyGenerator implements GameObject {
         }
 
         BaseGame game = BaseGame.get();
-        EnemyObject enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId);
+        EnemyObject enemy;
+        if (stageId == 1) {
+            enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, false);
+        }
+        else {
+            if (random.nextInt(2) == 1) {
+                enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, false);
+            }
+            else {
+               enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, true);
+            }
+        }
         game.add(MainScene.Layer.enemy.ordinal(), enemy);
 
         generateCount++;
