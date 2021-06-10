@@ -7,6 +7,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVer
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class TowerObject implements GameObject {
     private final StaticGameBitmap towerBitmap;
@@ -15,7 +16,7 @@ public class TowerObject implements GameObject {
     private final StaticGameBitmap guiBitmap;
     private final AnimationGameBitmapVertical animationTowerBitmap;
     private boolean isOn = false;
-
+    public int damage;
     protected float x;
     protected float y;
     protected int frameIndex;
@@ -76,7 +77,14 @@ public class TowerObject implements GameObject {
     }
 
     private void upgrade() {
-        isOn = false;
+        BaseGame game = BaseGame.get();
+
+        MainScene scene = (MainScene)game.getTopScene();
+        if (scene.isCanBuy(50)) {
+            isOn = false;
+            damage += 1;
+            scene.giveGold(-50);
+        }
     }
 
     private boolean IsIn(float x, float y) {

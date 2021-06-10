@@ -28,8 +28,6 @@ public class MainScene extends Scene {
     private TowerLocationData towerLocationData = new TowerLocationData();
     public int stageId = 3;
 
-    private int life;
-
     private int[] stageMapBitmaps = {
             R.mipmap.map_1,
             R.mipmap.map_2,
@@ -37,6 +35,7 @@ public class MainScene extends Scene {
     };
 
     private MovingBackgroundObject backgroundMap;
+    private BattleHUD battleHUD;
 
     public enum Layer {
         bg,  tower, enemy, friendly, towerBuilder, bullet, bomb, point, controller, ui, LAYER_COUNT
@@ -55,7 +54,6 @@ public class MainScene extends Scene {
         super.start();
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
-        life = 20;
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
@@ -74,8 +72,8 @@ public class MainScene extends Scene {
         for (int i = 0; i < pointsData.movePoints[stageId - 1].length; i += 2) {
             add(Layer.point, new EnemyPathPoint(pointsData.movePoints[stageId - 1][i], pointsData.movePoints[stageId - 1][i + 1]));
         }
-
-        add(Layer.ui, new BattleHUD(w * 1/ 6, h * 1/ 6));
+        battleHUD = new BattleHUD(w * 1/ 6, h * 1/ 6);
+        add(Layer.ui, battleHUD);
 
     }
 
@@ -130,6 +128,7 @@ public class MainScene extends Scene {
                 if (CollisionHelper.collides(enemy, bullet)) {
                     if (enemy.giveDamage(bullet.damage)) {
                         remove(enemy, false);
+                        giveGold(20);
                     }
                     remove(bullet, false);
                     collided = true;
@@ -184,6 +183,18 @@ public class MainScene extends Scene {
     }
 
     public void damageToLife(int value) {
-        life -= value;
+        battleHUD.addHp(-value);
+    }
+
+    public void giveGold(int value) {
+        battleHUD.addGold(value);
+    }
+
+    public void increaseWave(int value) {
+        battleHUD.addWave(value);
+    }
+
+    public boolean isCanBuy(int value) {
+        return battleHUD.isNotExpensive(value);
     }
 }

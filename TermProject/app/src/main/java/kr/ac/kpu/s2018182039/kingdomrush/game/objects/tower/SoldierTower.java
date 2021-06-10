@@ -37,6 +37,7 @@ public class SoldierTower extends TowerObject {
 
         towerId = towerIdCount;
         towerIdCount++;
+        damage = 5;
     }
 
     @Override
@@ -91,7 +92,7 @@ public class SoldierTower extends TowerObject {
         float dx = 1.0f;
         float dy = 1.0f;
         BaseGame game = BaseGame.get();
-        SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY, towerId);
+        SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY, towerId, damage);
         game.add(MainScene.Layer.friendly.ordinal(), solider);
     }
 }

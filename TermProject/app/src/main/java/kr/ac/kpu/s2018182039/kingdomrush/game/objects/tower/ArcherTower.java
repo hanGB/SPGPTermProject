@@ -21,6 +21,7 @@ public class ArcherTower extends TowerObject {
     ArcherTower(float x, float y) {
         super(x, y, R.mipmap.archer_tower);
         fireTime = FIRE_INTERVAL;
+        damage = 7;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class ArcherTower extends TowerObject {
 
         float dis = (float)Math.sqrt(dx * dx + dy * dy);
 
-        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 7);
+        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, damage);
         BaseGame game = BaseGame.get();
         game.add(MainScene.Layer.bullet.ordinal(), bullet);
     }

@@ -23,6 +23,7 @@ public class MagicTower extends TowerObject {
     MagicTower(float x, float y) {
         super(x, y, R.mipmap.magic_tower);
         fireTime = FIRE_INTERVAL;
+        damage = 5;
     }
 
     @Override
@@ -68,7 +69,7 @@ public class MagicTower extends TowerObject {
 
         float dis = (float)Math.sqrt(dx * dx + dy * dy);
 
-        Bullet bullet = Bullet.get(R.mipmap.ball, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 5);
+        Bullet bullet = Bullet.get(R.mipmap.ball, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, damage);
         BaseGame game = BaseGame.get();
         game.add(MainScene.Layer.bullet.ordinal(), bullet);
     }

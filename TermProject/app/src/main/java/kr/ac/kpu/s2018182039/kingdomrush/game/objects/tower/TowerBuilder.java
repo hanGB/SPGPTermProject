@@ -47,18 +47,31 @@ public class TowerBuilder implements GameObject {
         if (down) {
             if (isOn) {
                 BaseGame game = BaseGame.get();
+                MainScene scene = (MainScene)game.getTopScene();
                 if (IsInButton(x, y, -150, -150)){
-                    game.add(MainScene.Layer.tower.ordinal(), new ArcherTower(this.x, this.y));
-                    game.remove(this, true);
+                    if (scene.isCanBuy(70)) {
+                        game.add(MainScene.Layer.tower.ordinal(), new ArcherTower(this.x, this.y));
+                        game.remove(this, true);
+                        scene.giveGold(-70);
+                    }
                 } else if (IsInButton(x, y, 150, -150)) {
-                    game.add(MainScene.Layer.tower.ordinal(), new SoldierTower(this.x, this.y));
-                    game.remove(this, true);
+                    if (scene.isCanBuy(70)) {
+                        game.add(MainScene.Layer.tower.ordinal(), new SoldierTower(this.x, this.y));
+                        game.remove(this, true);
+                        scene.giveGold(-70);
+                    }
                 } else if (IsInButton(x, y, -150, 150)) {
-                    game.add(MainScene.Layer.tower.ordinal(), new MagicTower(this.x, this.y));
-                    game.remove(this, true);
+                    if (scene.isCanBuy(100)) {
+                        game.add(MainScene.Layer.tower.ordinal(), new MagicTower(this.x, this.y));
+                        game.remove(this, true);
+                        scene.giveGold(-100);
+                    }
                 } else if (IsInButton(x, y, 150, 150)) {
-                    game.add(MainScene.Layer.tower.ordinal(), new BombTower(this.x, this.y));
-                    game.remove(this, true);
+                    if (scene.isCanBuy(125)) {
+                        game.add(MainScene.Layer.tower.ordinal(), new BombTower(this.x, this.y));
+                        game.remove(this, true);
+                        scene.giveGold(-125);
+                    }
                 }
             }
             isOn = IsIn(x, y);

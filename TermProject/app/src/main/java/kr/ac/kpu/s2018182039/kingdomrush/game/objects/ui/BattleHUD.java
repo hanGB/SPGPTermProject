@@ -32,7 +32,9 @@ public class BattleHUD implements GameObject {
 
     @Override
     public void update() {
-
+        hpNum.update();
+        goldNum.update();
+        waveNum.update();
     }
 
     @Override
@@ -51,5 +53,8 @@ public class BattleHUD implements GameObject {
     }
     public void addWave(int wave) {
         waveNum.addScore(wave);
+    }
+    public boolean isNotExpensive(int gold){
+        return goldNum.isNotExpensive(gold);
     }
 }

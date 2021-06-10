@@ -37,10 +37,17 @@ public class Score implements GameObject {
         this.score += amount;
     }
 
+    public boolean isNotExpensive(int amount) {
+        return this.score >= amount;
+    }
+
     @Override
     public void update() {
         if (displayScore < score){
             displayScore++;
+        }
+        else if (displayScore > score){
+            displayScore--;
         }
     }
 

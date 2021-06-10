@@ -41,7 +41,7 @@ public class SoldierObject implements GameObject {
     private float attackTime = 0.0f;
 
 
-    public SoldierObject(float x, float y, float locationX, float locationY, int towerId) {
+    public SoldierObject(float x, float y, float locationX, float locationY, int towerId, int damage) {
         moveBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_move, 5, 2, 4);
         attackBitmap = new AnimationGameBitmapVertical(R.mipmap.soldier_attack, 2, 2, 4);
 
@@ -53,7 +53,7 @@ public class SoldierObject implements GameObject {
         this.x = x;
         this.y = y;
         hp = 25;
-        damage = 5;
+        this.damage = damage;
 
         this.towerId = towerId;
 
