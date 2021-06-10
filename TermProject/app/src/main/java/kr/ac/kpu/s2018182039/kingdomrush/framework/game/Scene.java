@@ -76,4 +76,5 @@ public class Scene {
     public void resume() {}
     public boolean onTouchEvent(MotionEvent e) { return false; }
     public boolean handleBackKey() { return false; }
+    public void processCollision() {}
 }

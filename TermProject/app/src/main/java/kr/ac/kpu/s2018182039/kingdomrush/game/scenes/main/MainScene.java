@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.CollisionHelper;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyGenerator;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerBuilder;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
@@ -73,5 +76,30 @@ public class MainScene extends Scene {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void processCollision() {
+        ArrayList<GameObject> enemies = layers.get(Layer.enemy.ordinal());
+        ArrayList<GameObject> bullets = layers.get(Layer.bullet.ordinal());
+
+        for (GameObject o1 : enemies) {
+            EnemyObject enemy = (EnemyObject)o1;
+            boolean collided = false;
+            for (GameObject o2 : bullets){
+                Bullet bullet = (Bullet) o2;
+                if (CollisionHelper.collides(enemy, bullet)) {
+                    if (enemy.giveDamage(bullet.damage)) {
+                        remove(enemy, false);
+                    }
+                    remove(bullet, false);
+                    collided = true;
+                    break;
+                }
+            }
+            if (collided) {
+                break;
+            }
+        }
     }
 }

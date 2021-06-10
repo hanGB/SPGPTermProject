@@ -67,7 +67,7 @@ public class ArcherTower extends TowerObject {
 
         float dis = (float)Math.sqrt(dx * dx + dy * dy);
 
-        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 8);
+        Bullet bullet = Bullet.get(R.mipmap.arrow, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, 7);
         BaseGame game = BaseGame.get();
         game.add(MainScene.Layer.bullet.ordinal(), bullet);
     }
