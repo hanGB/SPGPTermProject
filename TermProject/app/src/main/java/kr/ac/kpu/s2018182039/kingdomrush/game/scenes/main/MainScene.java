@@ -14,9 +14,18 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerBuilder;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
 
 public class MainScene extends Scene {
+    public int stageId = 1;
+    private int[] stageMapBitmaps = {
+            R.mipmap.map_1,
+            R.mipmap.map_2,
+            R.mipmap.map_3,
+    };
+    private MovingBackgroundObject backgroundMap;
+
     public enum Layer {
         bg, tower, enemy, friendly, towerBuilder, bullet, bomb, controller, LAYER_COUNT
     }
@@ -37,11 +46,11 @@ public class MainScene extends Scene {
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
-        StaticDrawObject background
-                = new StaticDrawObject(R.mipmap.test_map_background,
-                w / 2, h / 2, 160, 175, 420, 320, 8);
+        backgroundMap
+                = new MovingBackgroundObject(stageMapBitmaps[stageId - 1],
+                w / 2, h / 2, 0, 0, 888, 861, 3);
 
-        add(Layer.bg, background);
+        add(Layer.bg, backgroundMap);
         add(Layer.controller, new EnemyGenerator());
         add(Layer.towerBuilder, new TowerBuilder(600, 600));
         add(Layer.towerBuilder, new TowerBuilder(1000, 300));
@@ -54,6 +63,8 @@ public class MainScene extends Scene {
         ArrayList<GameObject> towerBuilders = layers.get(Layer.towerBuilder.ordinal());
         ArrayList<GameObject> towers = layers.get(Layer.tower.ordinal());
         if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+            backgroundMap.pressMove(event.getX(), event.getY());
+
             for (GameObject o  : towerBuilders){
                 TowerBuilder builder = (TowerBuilder)o;
                 builder.pressOn(event.getX(), event.getY(), true);
@@ -65,6 +76,7 @@ public class MainScene extends Scene {
 
             return true;
         } else if (action == MotionEvent.ACTION_UP) {
+            backgroundMap.pressUp();
             for (GameObject o  : towerBuilders){
                 TowerBuilder builder = (TowerBuilder)o;
                 builder.pressOn(event.getX(), event.getY(), false);

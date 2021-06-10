@@ -108,7 +108,9 @@ public class StageMenuScene extends Scene {
     public void processButtonResult(boolean result) {
         BaseGame game = BaseGame.get();
         if (result) {
-            game.push(new MainScene());
+            MainScene scene = new MainScene();
+            scene.stageId = this.stageNumber;
+            game.push(scene);
         }
         else {
             game.popScene();
