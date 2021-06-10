@@ -23,9 +23,9 @@ public class EnemyPathPoint implements GameObject {
 
     @Override
     public void draw(Canvas canvas) {
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(0xFFFF0000);
-        canvas.drawCircle(x, y, 30, paint);
+        //paint.setStyle(Paint.Style.FILL);
+        //paint.setColor(0xFFFF0000);
+        //canvas.drawCircle(x, y, 30, paint);
     }
 
     public void adjustLocationWithBackground(float x, float y) {

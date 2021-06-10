@@ -13,6 +13,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyGenerator;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyMovementPointsData;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyPathPoint;
+import kr.ac.kpu.s2018182039.kingdomrush.game.control.TowerLocationData;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.BombBullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
@@ -23,6 +24,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
 
 public class MainScene extends Scene {
     private EnemyMovementPointsData pointsData = new EnemyMovementPointsData();
+    private TowerLocationData towerLocationData = new TowerLocationData();
     public int stageId = 3;
 
     private int life;
@@ -62,9 +64,11 @@ public class MainScene extends Scene {
 
         add(Layer.bg, backgroundMap);
         add(Layer.controller, new EnemyGenerator(stageId));
-        add(Layer.towerBuilder, new TowerBuilder(600, 600));
-        add(Layer.towerBuilder, new TowerBuilder(1000, 300));
-        add(Layer.towerBuilder, new TowerBuilder(1400, 600));
+
+        for (int i = 0; i < towerLocationData.locationPoints[stageId - 1].length; i += 2) {
+            add(Layer.towerBuilder,
+                    new TowerBuilder(towerLocationData.locationPoints[stageId - 1][i], towerLocationData.locationPoints[stageId - 1][i + 1]));
+        }
 
         for (int i = 0; i < pointsData.movePoints[stageId - 1].length; i += 2) {
             add(Layer.point, new EnemyPathPoint(pointsData.movePoints[stageId - 1][i], pointsData.movePoints[stageId - 1][i + 1]));

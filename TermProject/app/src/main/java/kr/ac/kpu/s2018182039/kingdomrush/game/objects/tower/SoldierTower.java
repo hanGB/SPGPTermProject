@@ -31,8 +31,8 @@ public class SoldierTower extends TowerObject {
         this.x = x;
         this.y = y;
 
-        gatheringPlaceX = x + 200;
-        gatheringPlaceY = y + 200;
+        gatheringPlaceX = x;
+        gatheringPlaceY = y;
         spawnTime = SPAWN_INTERVAL;
 
         towerId = towerIdCount;
