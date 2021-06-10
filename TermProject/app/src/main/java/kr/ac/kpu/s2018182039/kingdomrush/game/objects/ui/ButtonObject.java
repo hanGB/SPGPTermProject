@@ -33,8 +33,7 @@ public class ButtonObject implements GameObject {
         else {
             pressed = false;
             if(IsIn(x, y)) {
-                BaseGame game = BaseGame.get();
-                game.push(new StageMenuScene());
+                processButton();
             }
         }
     }
@@ -51,6 +50,10 @@ public class ButtonObject implements GameObject {
     }
 
     public void update() {
+
+    }
+
+    public void processButton() {
 
     }
 

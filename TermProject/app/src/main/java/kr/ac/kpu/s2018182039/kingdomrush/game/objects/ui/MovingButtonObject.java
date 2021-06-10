@@ -3,6 +3,8 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import androidx.viewpager2.widget.ViewPager2;
+
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
@@ -37,5 +39,11 @@ public class MovingButtonObject extends ButtonObject {
         if ((distanceY > 0 && y > dy) || (distanceY < 0 && y < dy)) {
             y = dy;
         }
+    }
+
+    @Override
+    public void processButton() {
+        BaseGame game = BaseGame.get();
+        game.push(new StageMenuScene());
     }
 }
