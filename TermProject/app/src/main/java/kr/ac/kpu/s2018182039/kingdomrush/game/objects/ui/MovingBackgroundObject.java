@@ -14,11 +14,10 @@ public class MovingBackgroundObject implements GameObject {
     private static final String TAG = MovingBackgroundObject.class.getSimpleName();
     private float x, y;
     private float tx, ty;
-    private float speed;
     private final StaticGameBitmap bitmap;
     private boolean down;
     private float prevX, prevY;
-    private float moveX, moveY;
+    public float moveX, moveY;
 
     public MovingBackgroundObject(int resId, float x, float y, int left, int top, int right, int bottom, int pixel_size) {
         bitmap = new StaticGameBitmap(resId, left, top, right, bottom, pixel_size);
@@ -26,7 +25,6 @@ public class MovingBackgroundObject implements GameObject {
         this.y = y;
         this.tx = 0;
         this.ty = 0;
-        this.speed = 800;
         this.down = false;
     }
 
@@ -43,16 +41,16 @@ public class MovingBackgroundObject implements GameObject {
             prevY = y;
         }
 
-        moveX = x;
-        moveY = y;
-
-        tx = moveX - prevX;
-        ty = moveY - prevY;
+        tx = x - prevX;
+        ty = y - prevY;
 
         int vw = GameView.view.getWidth();
         int vh = GameView.view.getHeight();
         int bhw = bitmap.getWidth() / 2;
         int bhh = bitmap.getHeight() / 2;
+
+        float tempX = this.x;
+        float tempY = this.y;
 
         this.x -= tx;
         if (this.x > bhw || bhw < vw - this.x) {
@@ -72,6 +70,9 @@ public class MovingBackgroundObject implements GameObject {
                 this.y = vh - bhh;
             }
         }
+
+        moveX = tempX - this.x;
+        moveY = tempY - this.y;
 
         prevX = x;
         prevY = y;

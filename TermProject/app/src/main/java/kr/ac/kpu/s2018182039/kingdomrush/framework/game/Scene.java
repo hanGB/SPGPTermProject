@@ -11,7 +11,6 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 public class Scene {
     protected ArrayList<ArrayList<GameObject>> layers;
     public ArrayList<ArrayList<GameObject>> getLayers() { return layers; }
-
     public boolean isTransparent() {
         return transparent;
     }
@@ -76,5 +75,8 @@ public class Scene {
     public void resume() {}
     public boolean onTouchEvent(MotionEvent e) { return false; }
     public boolean handleBackKey() { return false; }
+    // 충돌 처리
     public void processCollision() {}
+    // 배경이 이동했을때 위치 맞춤
+    public void adjustLocation() {}
 }

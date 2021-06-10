@@ -78,4 +78,15 @@ public class StageMenuScene extends Scene {
 
         return false;
     }
+
+    @Override
+    public void adjustLocation() {
+        for (GameObject o : objectsAt(Layer.flag)) {
+            StageFlagObject flag = (StageFlagObject)o;
+            flag.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        backgroundMap.moveX = 0;
+        backgroundMap.moveY = 0;
+    }
+
 }

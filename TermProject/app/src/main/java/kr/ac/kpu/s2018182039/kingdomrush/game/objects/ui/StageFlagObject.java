@@ -18,4 +18,9 @@ public class StageFlagObject extends ButtonObject {
     public void processButton() {
 
     }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
+    }
 }

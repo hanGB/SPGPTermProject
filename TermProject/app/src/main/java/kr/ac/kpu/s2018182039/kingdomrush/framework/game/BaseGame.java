@@ -108,6 +108,7 @@ public class BaseGame {
             }
         }
         getTopScene().processCollision();
+        getTopScene().adjustLocation();
     }
 
     public void draw(Canvas canvas) {
