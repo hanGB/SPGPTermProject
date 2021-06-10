@@ -128,7 +128,7 @@ public class MainScene extends Scene {
                 if (CollisionHelper.collides(enemy, bullet)) {
                     if (enemy.giveDamage(bullet.damage)) {
                         remove(enemy, false);
-                        giveGold(20);
+                        giveGold(15);
                     }
                     remove(bullet, false);
                     collided = true;

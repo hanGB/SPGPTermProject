@@ -44,7 +44,7 @@ public class EnemyObject implements GameObject, BoxCollidable {
 
     private float attackTime = 0.0f;
 
-    public EnemyObject(float x, float y) {
+    public EnemyObject(float x, float y, int hp, int damage) {
         moveBitmap = new AnimationGameBitmap(R.mipmap.enemy_move, 5, 5);
         attackBitmap = new AnimationGameBitmap(R.mipmap.enemy_attack, 3, 2);
 
@@ -59,8 +59,8 @@ public class EnemyObject implements GameObject, BoxCollidable {
         targetX = point.x;
         targetY = point.y;
 
-        hp = 20;
-        damage = 5;
+        this.hp = hp;
+        this.damage = damage;
 
         action = MOVE;
     }

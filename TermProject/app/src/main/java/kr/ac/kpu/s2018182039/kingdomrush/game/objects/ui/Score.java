@@ -43,6 +43,10 @@ public class Score implements GameObject {
 
     @Override
     public void update() {
+        if (Math.abs(displayScore - score) > 50) {
+            displayScore = score;
+        }
+
         if (displayScore < score){
             displayScore++;
         }

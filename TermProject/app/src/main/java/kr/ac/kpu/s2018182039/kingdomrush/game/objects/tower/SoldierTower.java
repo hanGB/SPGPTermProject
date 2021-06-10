@@ -9,7 +9,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class SoldierTower extends TowerObject {
     private static final int BULLET_SPEED = 1500;
-    private static final float SPAWN_INTERVAL = 2.0f;
+    private static final float SPAWN_INTERVAL = 5.0f;
     private static final int MAX_SOLDIER = 3;
 
     private static int towerIdCount = 0;
@@ -21,8 +21,6 @@ public class SoldierTower extends TowerObject {
     private float gatheringPlaceY;
 
     private float spawnTime;
-    private boolean isSpawning = false;
-    private boolean isSpawnSoldier = false;
 
     private int towerId;
 
@@ -57,34 +55,20 @@ public class SoldierTower extends TowerObject {
             }
         }
         if (count == MAX_SOLDIER) {
-            isSpawning = false;
+            frameIndex = 0;
             return;
         }
 
         spawnTime += game.frameTime;
         if (spawnTime >= SPAWN_INTERVAL) {
-            isSpawning = true;
-            isSpawnSoldier = false;
+            spawnSolider();
             spawnTime -= SPAWN_INTERVAL;
         }
-        if (isSpawning) {
-            if (spawnTime > SPAWN_INTERVAL / 2) {
-                if (!isSpawnSoldier) {
-                    spawnSolider();
-                    isSpawnSoldier = true;
-                }
-            }
-        }
 
-
-        if (!isSpawning) {
-            frameIndex = 1;
+        if (spawnTime < SPAWN_INTERVAL * 9 / 10) {
+            frameIndex = 0;
         } else {
-            if (spawnTime < SPAWN_INTERVAL / 2) {
-                frameIndex = 0;
-            } else {
-                frameIndex = 1;
-            }
+            frameIndex = 1;
         }
     }
 
