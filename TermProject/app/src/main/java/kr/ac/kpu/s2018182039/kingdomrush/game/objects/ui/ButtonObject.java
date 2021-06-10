@@ -4,9 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
-import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageMenuScene;
 
 public class ButtonObject implements GameObject {
     public float x, y;

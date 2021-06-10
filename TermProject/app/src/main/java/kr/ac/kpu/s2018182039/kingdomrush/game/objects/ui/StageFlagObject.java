@@ -1,9 +1,10 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui;
 
 import android.graphics.Rect;
-import android.text.style.UpdateAppearance;
 
-import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.ButtonObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageMenuScene;
 
 public class StageFlagObject extends ButtonObject {
 
@@ -16,7 +17,8 @@ public class StageFlagObject extends ButtonObject {
 
     @Override
     public void processButton() {
-
+        BaseGame game = BaseGame.get();
+        game.push(new StageMenuScene());
     }
 
     public void adjustLocationWithBackground(float x, float y) {
