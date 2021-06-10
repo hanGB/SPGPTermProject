@@ -1,6 +1,9 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu;
 
+import android.util.Log;
 import android.view.MotionEvent;
+
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -41,11 +44,8 @@ public class StageMenuScene extends Scene {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN) {
-            backgroundMap.pressDown(event.getX(), event.getY());
-            return true;
-        }
-        else if (action == MotionEvent.ACTION_MOVE) {
+        Log.d("test", "" + action + "");
+        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
             backgroundMap.pressMove(event.getX(), event.getY());
             return true;
         }
@@ -53,6 +53,7 @@ public class StageMenuScene extends Scene {
             backgroundMap.pressUp();
             return true;
         }
+
         return false;
     }
 }

@@ -1,6 +1,7 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;

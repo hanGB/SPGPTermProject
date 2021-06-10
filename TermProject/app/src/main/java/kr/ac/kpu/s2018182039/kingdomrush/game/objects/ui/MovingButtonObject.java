@@ -7,6 +7,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageMenuScene;
 
 public class MovingButtonObject implements GameObject {
     private float x, y;
@@ -43,7 +44,7 @@ public class MovingButtonObject implements GameObject {
             pressed = false;
             if(IsIn(x, y)) {
                 BaseGame game = BaseGame.get();
-                game.push(new MainScene());
+                game.push(new StageMenuScene());
             }
         }
     }
