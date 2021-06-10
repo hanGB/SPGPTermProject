@@ -1,5 +1,6 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main;
 
+import android.graphics.Path;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.CollisionHelper;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyGenerator;
+import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyMovementPointsData;
+import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyPathPoint;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.BombBullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
@@ -17,21 +20,23 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerBuilder;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StageFlagObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageSelectScene;
 
 public class MainScene extends Scene {
+    private EnemyMovementPointsData pointsData = new EnemyMovementPointsData();
     public int stageId = 1;
+
+    private int life;
+
     private int[] stageMapBitmaps = {
             R.mipmap.map_1,
             R.mipmap.map_2,
             R.mipmap.map_3,
     };
+
     private MovingBackgroundObject backgroundMap;
 
     public enum Layer {
-        bg, tower, enemy, friendly, towerBuilder, bullet, bomb, controller, LAYER_COUNT
+        bg, point, tower, enemy, friendly, towerBuilder, bullet, bomb, controller, LAYER_COUNT
     }
     public static MainScene scene;
     public void add(Layer layer, GameObject obj) {
@@ -47,6 +52,7 @@ public class MainScene extends Scene {
         super.start();
         int w = GameView.view.getWidth();
         int h = GameView.view.getHeight();
+        life = 20;
 
         initLayers(Layer.LAYER_COUNT.ordinal());
 
@@ -55,10 +61,15 @@ public class MainScene extends Scene {
                 w / 2, h / 2, 50, 50, 850, 850, 3);
 
         add(Layer.bg, backgroundMap);
-        add(Layer.controller, new EnemyGenerator());
+        add(Layer.controller, new EnemyGenerator(stageId));
         add(Layer.towerBuilder, new TowerBuilder(600, 600));
         add(Layer.towerBuilder, new TowerBuilder(1000, 300));
         add(Layer.towerBuilder, new TowerBuilder(1400, 600));
+
+        for (int i = 0; i < pointsData.movePoints[stageId - 1].length; i += 2) {
+            add(Layer.point, new EnemyPathPoint(pointsData.movePoints[stageId - 1][i], pointsData.movePoints[stageId - 1][i + 1]));
+        }
+
     }
 
     @Override
@@ -126,6 +137,10 @@ public class MainScene extends Scene {
 
     @Override
     public void adjustLocation() {
+        if ( backgroundMap.moveX == 0 && backgroundMap.moveY == 0) {
+            return;
+        }
+
         for (GameObject o : objectsAt(Layer.tower)) {
             TowerObject tower = (TowerObject)o;
             tower.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
@@ -134,6 +149,11 @@ public class MainScene extends Scene {
             TowerBuilder builder = (TowerBuilder)o;
             builder.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
         }
+        for (GameObject o : objectsAt(Layer.point)) {
+            EnemyPathPoint point = (EnemyPathPoint)o;
+            point.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+
         for (GameObject o : objectsAt(Layer.enemy)) {
             EnemyObject enemy = (EnemyObject)o;
             enemy.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
@@ -151,7 +171,12 @@ public class MainScene extends Scene {
             bomb.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
         }
 
+
         backgroundMap.moveX = 0;
         backgroundMap.moveY = 0;
+    }
+
+    public void damageToLife(int value) {
+        life -= value;
     }
 }

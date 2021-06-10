@@ -12,11 +12,13 @@ public class EnemyGenerator implements GameObject {
     private float time;
     private float spawnInterval;
     private int wave;
+    private int stageId;
 
-    public EnemyGenerator() {
+    public EnemyGenerator(int stageId) {
         time = INITIAL_SPAWN_INTERVAL;
         spawnInterval = INITIAL_SPAWN_INTERVAL;
         wave = 0;
+        this.stageId = stageId;
     }
 
     @Override

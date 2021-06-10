@@ -82,6 +82,10 @@ public class StageSelectScene extends Scene {
 
     @Override
     public void adjustLocation() {
+        if ( backgroundMap.moveX == 0 && backgroundMap.moveY == 0) {
+            return;
+        }
+
         for (GameObject o : objectsAt(Layer.flag)) {
             StageFlagObject flag = (StageFlagObject)o;
             flag.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
