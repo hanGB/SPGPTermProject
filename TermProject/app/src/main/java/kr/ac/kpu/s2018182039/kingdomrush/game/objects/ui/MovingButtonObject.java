@@ -9,57 +9,24 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageMenuScene;
 
-public class MovingButtonObject implements GameObject {
-    private float x, y;
+public class MovingButtonObject extends ButtonObject {
     private float dx, dy;
-    private final StaticGameBitmap bitmap;
-    private final StaticGameBitmap bitmapPressed;
-    private boolean pressed;
     private float distanceX;
     private float distanceY;
     private float speed = 2.f;
 
     public MovingButtonObject(int resId, int resIdPressed, float x, float y, float dx, float dy,
                               Rect rect, Rect rectPressed, int pixel_size) {
-        bitmap = new StaticGameBitmap(resId, rect.left, rect.top, rect.right, rect.bottom, pixel_size);
-        bitmapPressed = new StaticGameBitmap(resIdPressed,
-                rectPressed.left, rectPressed.top, rectPressed.right, rectPressed.bottom, pixel_size);
-        this.x = x;
-        this.y = y;
+
+        super(resId, resIdPressed, x, y, rect, rectPressed, pixel_size);
+
         this.dx = dx;
         this.dy = dy;
         this.distanceX = dx - x;
         this.distanceY = dy - y;
-        pressed = false;
     }
 
-    public void pressOn(float x, float y, boolean down) {
-        if (down) {
-            pressed = false;
-            if(IsIn(x, y)) {
-                pressed = true;
-            }
-        }
-        else {
-            pressed = false;
-            if(IsIn(x, y)) {
-                BaseGame game = BaseGame.get();
-                game.push(new StageMenuScene());
-            }
-        }
-    }
-
-    private boolean IsIn(float x, float y) {
-        int hw = bitmap.getWidth() / 2;
-        int hh = bitmap.getHeight() / 2;
-        if ( (this.x - hw) < x && x < (this.x + hw)) {
-            if ( (this.y - hh) < y && y < (this.y + hh)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
+    @Override
     public void update() {
         BaseGame game = BaseGame.get();
         x += (distanceX * speed * game.frameTime);
@@ -70,14 +37,5 @@ public class MovingButtonObject implements GameObject {
         if ((distanceY > 0 && y > dy) || (distanceY < 0 && y < dy)) {
             y = dy;
         }
-    }
-
-    public void draw(Canvas canvas) {
-        if (!pressed) {
-            bitmap.draw(canvas, x, y);
-        } else {
-            bitmapPressed.draw(canvas, x, y);
-        }
-
     }
 }

@@ -72,7 +72,7 @@ public class MovingBackgroundObject implements GameObject {
                 this.y = vh - bhh;
             }
         }
-        
+
         prevX = x;
         prevY = y;
     }
