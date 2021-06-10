@@ -52,7 +52,7 @@ public class MovingBackgroundObject implements GameObject {
         float tempX = this.x;
         float tempY = this.y;
 
-        this.x -= tx;
+        this.x += tx;
         if (this.x > bhw || bhw < vw - this.x) {
             if (this.x > bhw ) {
                 this.x = bhw;
@@ -61,7 +61,7 @@ public class MovingBackgroundObject implements GameObject {
                 this.x = vw - bhw;
             }
         }
-        this.y -= ty;
+        this.y += ty;
         if (this.y > bhh || bhh < vh - this.y) {
             if (this.y > bhh ) {
                 this.y = bhh;
