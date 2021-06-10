@@ -196,4 +196,9 @@ public class EnemyObject implements GameObject, BoxCollidable {
         moveBitmap.getBoundingRect(x, y, boundingRect);
         return boundingRect;
     }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
+    }
 }

@@ -16,8 +16,8 @@ public class TowerObject implements GameObject {
     private final AnimationGameBitmapVertical animationTowerBitmap;
     private boolean isOn = false;
 
-    protected final float x;
-    protected final float y;
+    protected float x;
+    protected float y;
     protected int frameIndex;
 
     private boolean animationTower = false;
@@ -102,5 +102,10 @@ public class TowerObject implements GameObject {
             return (this.y + locationY - hh) < y && y < (this.y + locationY + hh);
         }
         return false;
+    }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
     }
 }

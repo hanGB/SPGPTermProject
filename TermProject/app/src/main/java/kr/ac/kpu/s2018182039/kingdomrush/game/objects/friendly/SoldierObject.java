@@ -157,4 +157,13 @@ public class SoldierObject implements GameObject {
             attackBitmap.draw(canvas, x, y);
         }
     }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
+        this.locationX -= x;
+        this.locationY -= y;
+        this.targetX  -= x;
+        this.targetY -= y;
+    }
 }

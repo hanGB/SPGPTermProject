@@ -10,12 +10,16 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.CollisionHelper;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyGenerator;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.BombBullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerBuilder;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StageFlagObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu.StageSelectScene;
 
 public class MainScene extends Scene {
     public int stageId = 1;
@@ -48,7 +52,7 @@ public class MainScene extends Scene {
 
         backgroundMap
                 = new MovingBackgroundObject(stageMapBitmaps[stageId - 1],
-                w / 2, h / 2, 0, 0, 888, 861, 3);
+                w / 2, h / 2, 50, 50, 850, 850, 3);
 
         add(Layer.bg, backgroundMap);
         add(Layer.controller, new EnemyGenerator());
@@ -62,7 +66,7 @@ public class MainScene extends Scene {
         int action = event.getAction();
         ArrayList<GameObject> towerBuilders = layers.get(Layer.towerBuilder.ordinal());
         ArrayList<GameObject> towers = layers.get(Layer.tower.ordinal());
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE) {
+        if (action == MotionEvent.ACTION_DOWN) {
             backgroundMap.pressMove(event.getX(), event.getY());
 
             for (GameObject o  : towerBuilders){
@@ -75,7 +79,12 @@ public class MainScene extends Scene {
             }
 
             return true;
-        } else if (action == MotionEvent.ACTION_UP) {
+        }
+        else if (action == MotionEvent.ACTION_MOVE) {
+            backgroundMap.pressMove(event.getX(), event.getY());
+            return true;
+        }
+        else if (action == MotionEvent.ACTION_UP) {
             backgroundMap.pressUp();
             for (GameObject o  : towerBuilders){
                 TowerBuilder builder = (TowerBuilder)o;
@@ -113,5 +122,36 @@ public class MainScene extends Scene {
                 break;
             }
         }
+    }
+
+    @Override
+    public void adjustLocation() {
+        for (GameObject o : objectsAt(Layer.tower)) {
+            TowerObject tower = (TowerObject)o;
+            tower.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        for (GameObject o : objectsAt(Layer.towerBuilder)) {
+            TowerBuilder builder = (TowerBuilder)o;
+            builder.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        for (GameObject o : objectsAt(Layer.enemy)) {
+            EnemyObject enemy = (EnemyObject)o;
+            enemy.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        for (GameObject o : objectsAt(Layer.friendly)) {
+            SoldierObject soldier = (SoldierObject)o;
+            soldier.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        for (GameObject o : objectsAt(Layer.bullet)) {
+            Bullet bullet = (Bullet)o;
+            bullet.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+        for (GameObject o : objectsAt(Layer.bomb)) {
+            BombBullet bomb = (BombBullet)o;
+            bomb.adjustLocationWithBackground(backgroundMap.moveX, backgroundMap.moveY);
+        }
+
+        backgroundMap.moveX = 0;
+        backgroundMap.moveY = 0;
     }
 }

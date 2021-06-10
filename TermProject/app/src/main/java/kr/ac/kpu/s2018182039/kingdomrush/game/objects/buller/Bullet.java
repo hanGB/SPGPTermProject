@@ -93,4 +93,9 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     public void recycle() {
         // 재활용통에 들어가는 시점에 해야하는 일을 하는 함수
     }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
+    }
 }

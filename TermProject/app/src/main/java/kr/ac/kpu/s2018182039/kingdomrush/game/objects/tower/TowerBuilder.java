@@ -15,8 +15,8 @@ public class TowerBuilder implements GameObject {
     private final StaticGameBitmap guiBitmap;
     private final StaticGameBitmap slotBitmap;
 
-    private final float x;
-    private final float y;
+    private float x;
+    private float y;
     private boolean isOn = false;
 
     public TowerBuilder(float x, float y) {
@@ -85,5 +85,10 @@ public class TowerBuilder implements GameObject {
             }
         }
         return false;
+    }
+
+    public void adjustLocationWithBackground(float x, float y) {
+        this.x -= x;
+        this.y -= y;
     }
 }
