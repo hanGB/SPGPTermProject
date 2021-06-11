@@ -1,10 +1,12 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main;
 
+import android.media.MediaPlayer;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.CollisionHelper;
@@ -33,6 +35,14 @@ public class MainScene extends Scene {
             R.mipmap.map_2,
             R.mipmap.map_3,
     };
+
+    private int[] stageBGMs= {
+            R.raw.music_battle_under_attack_forest,
+            R.raw.music_battle_under_attack_wastelands,
+            R.raw.music_battle_under_attack_mountain,
+    };
+
+    MediaPlayer mediaPlayer;
 
     private MovingBackgroundObject backgroundMap;
     private BattleHUD battleHUD;
@@ -81,6 +91,12 @@ public class MainScene extends Scene {
 
         battleHUD = new BattleHUD(w * 1/ 6, h * 1/ 6);
         add(Layer.ui, battleHUD);
+
+        MainGame game = (MainGame)BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, stageBGMs[stageId - 1]);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.6f,0.6f);
+        mediaPlayer.start();
 
     }
 
@@ -210,5 +226,28 @@ public class MainScene extends Scene {
 
     public boolean isCanBuy(int value) {
         return battleHUD.isNotExpensive(value);
+    }
+
+    @Override
+    public void end() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    @Override
+    public void pause() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    @Override
+    public void resume() {
+        MainGame game = (MainGame)BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, stageBGMs[stageId - 1]);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.6f,0.6f);
+        mediaPlayer.start();
     }
 }

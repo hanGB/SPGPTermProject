@@ -1,5 +1,7 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
@@ -13,6 +15,8 @@ public class MainGame extends BaseGame {
     }
 
 
+    public Context context;
+
     @Override
     public boolean initResources() {
         if (initialized) {
@@ -25,4 +29,6 @@ public class MainGame extends BaseGame {
         return true;
 
     }
+
+
 }

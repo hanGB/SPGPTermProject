@@ -1,17 +1,20 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu;
 
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
 import kr.ac.kpu.s2018182039.kingdomrush.R;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingBackgroundObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StageFlagObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainGame;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class StageSelectScene extends Scene {
@@ -27,6 +30,8 @@ public class StageSelectScene extends Scene {
     public ArrayList<GameObject> objectsAt(StageSelectScene.Layer layer) {
         return objectsAt(layer.ordinal());
     }
+
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void start() {
@@ -51,7 +56,11 @@ public class StageSelectScene extends Scene {
                 w* 5/6, h / 5, rect, rectPressed, 2, 3);
         add(Layer.flag, stage3Flag);
 
-
+        MainGame game = (MainGame) BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, R.raw.music_map);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.3f,0.3f);
+        mediaPlayer.start();
     }
 
     @Override
@@ -92,6 +101,29 @@ public class StageSelectScene extends Scene {
         }
         backgroundMap.moveX = 0;
         backgroundMap.moveY = 0;
+    }
+
+    @Override
+    public void end() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    @Override
+    public void pause() {
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
+    }
+
+    @Override
+    public void resume() {
+        MainGame game = (MainGame)BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, R.raw.music_map);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.3f,0.3f);
+        mediaPlayer.start();
     }
 
 }

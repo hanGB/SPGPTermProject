@@ -1,18 +1,24 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.menu;
 
+
 import android.graphics.Rect;
-import android.util.Log;
+
+import android.media.MediaPlayer;
+import android.provider.MediaStore;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.s2018182039.kingdomrush.MainActivity;
 import kr.ac.kpu.s2018182039.kingdomrush.R;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
-import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
+
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingButtonObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
+import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainGame;
 
 public class TitleMenuScene extends Scene {
     public enum Layer {
@@ -22,7 +28,7 @@ public class TitleMenuScene extends Scene {
 
     private MovingButtonObject startButton;
 
-    private int bgmStreamId;
+    private MediaPlayer mediaPlayer;
 
     public void add(TitleMenuScene.Layer layer, GameObject obj) {
         add(layer.ordinal(), obj);
@@ -53,22 +59,32 @@ public class TitleMenuScene extends Scene {
         add(Layer.button, startButton);
         add(Layer.title, title);
 
-        bgmStreamId = Sound.playBG(R.raw.music_main_menu);
+        MainGame game = (MainGame)BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, R.raw.music_main_menu);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     @Override
     public void end() {
-        Sound.stopBG(bgmStreamId);
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
 
     @Override
     public void pause() {
-        Sound.stopBG(bgmStreamId);
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
     }
 
     @Override
     public void resume() {
-        bgmStreamId = Sound.playBG(R.raw.music_main_menu);
+        MainGame game = (MainGame)BaseGame.get();
+        mediaPlayer = MediaPlayer.create(game.context, R.raw.music_main_menu);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
     }
 
     @Override
