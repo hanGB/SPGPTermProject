@@ -35,7 +35,7 @@ public class SoldierObject implements GameObject {
     private int damage;
 
     private boolean targetSetEnd = false;
-    private float range = 500.0f;
+    private float range = 350.0f;
     private float attackRange = 50.0f;
     private EnemyObject targetEnemy;
 

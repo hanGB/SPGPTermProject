@@ -16,9 +16,6 @@ public class SoldierTower extends TowerObject {
 
     private static int towerIdCount = 0;
 
-    private final float x;
-    private final float y;
-
     private float gatheringPlaceX;
     private float gatheringPlaceY;
 
@@ -28,11 +25,9 @@ public class SoldierTower extends TowerObject {
 
     SoldierTower(float x, float y) {
         super(x, y);
-        this.x = x;
-        this.y = y;
 
-        gatheringPlaceX = x;
-        gatheringPlaceY = y;
+        gatheringPlaceX = x + 100;
+        gatheringPlaceY = y + 60;
         spawnTime = SPAWN_INTERVAL;
 
         towerId = towerIdCount;
@@ -79,7 +74,14 @@ public class SoldierTower extends TowerObject {
         float dy = 1.0f;
         BaseGame game = BaseGame.get();
         Sound.play(R.raw.sound_open_tower_menu);
-        SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY, towerId, damage);
+        SoldierObject solider = new SoldierObject(x + 50, y + 50, gatheringPlaceX, gatheringPlaceY, towerId, damage);
         game.add(MainScene.Layer.friendly.ordinal(), solider);
+    }
+
+    @Override
+    public void adjustLocationWithBackground(float x, float y) {
+        super.adjustLocationWithBackground(x, y);
+        gatheringPlaceX -= x;
+        gatheringPlaceY -= y;
     }
 }
