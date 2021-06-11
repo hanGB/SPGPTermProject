@@ -4,13 +4,15 @@ import android.graphics.Canvas;
 
 import java.util.Random;
 
+import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class EnemyGenerator implements GameObject {
-    private static final float INITIAL_SPAWN_INTERVAL = 2.0f;
+    private static float INITIAL_SPAWN_INTERVAL = 2.0f;
     private static final int WAVE_ENEMY_COUNT = 10;
     private static final int INCREASE_HP_PER_WAVE = 2;
 
@@ -31,6 +33,8 @@ public class EnemyGenerator implements GameObject {
         hp = 20;
         damage = 5;
         generateCount = 0;
+
+        INITIAL_SPAWN_INTERVAL = 2.0f - stageId * 0.5f;
     }
 
     @Override
@@ -47,6 +51,7 @@ public class EnemyGenerator implements GameObject {
         if (generateCount > WAVE_ENEMY_COUNT) {
             generateCount = 0;
             wave++;
+            Sound.play(R.raw.sound_next_wave_ready);
 
             BaseGame game = BaseGame.get();
             MainScene scene = (MainScene)game.getTopScene();

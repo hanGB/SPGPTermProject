@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
-import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.bullet.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
@@ -71,6 +72,9 @@ public class MagicTower extends TowerObject {
 
         Bullet bullet = Bullet.get(R.mipmap.ball, this.x, this.y, dx / dis, dy / dis, BULLET_SPEED, damage);
         BaseGame game = BaseGame.get();
+
+        Sound.play(R.raw.sound_mage_shot);
+
         game.add(MainScene.Layer.bullet.ordinal(), bullet);
     }
 }

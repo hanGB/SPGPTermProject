@@ -1,8 +1,9 @@
-package kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller;
+package kr.ac.kpu.s2018182039.kingdomrush.game.objects.bullet;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;
 
+import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.BoxCollidable;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
@@ -19,6 +20,7 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
     private float dx;
     private float dy;
     public int damage;
+    public boolean arrow;
 
     private Bullet(int resId, float x, float y, float dx, float dy, int speed, int damage) {
         this.x = x;
@@ -30,6 +32,13 @@ public class Bullet implements GameObject, BoxCollidable, Recyclable {
         this.damage = damage;
 
         this.bitmap = new StaticGameBitmap(resId, 2);
+
+        if (resId == R.mipmap.arrow) {
+            arrow = true;
+        }
+        else {
+            arrow = false;
+        }
     }
 
     public static Bullet get(int resId, float x, float y, float dx, float dy, int speed, int damage) {

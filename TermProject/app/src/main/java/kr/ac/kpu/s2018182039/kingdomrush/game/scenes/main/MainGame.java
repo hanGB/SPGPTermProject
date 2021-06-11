@@ -19,7 +19,7 @@ public class MainGame extends BaseGame {
             return false;
         }
 
-        push(new MainScene());
+        push(new TitleMenuScene());
 
         initialized = true;
         return true;

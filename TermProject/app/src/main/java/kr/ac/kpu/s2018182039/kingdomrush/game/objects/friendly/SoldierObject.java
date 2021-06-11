@@ -8,6 +8,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVertical;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
@@ -65,6 +66,7 @@ public class SoldierObject implements GameObject {
     public void update() {
         if (hp <= 0){
             BaseGame game = BaseGame.get();
+            Sound.play(R.raw.sound_human_dead1);
             game.remove(this, true);
         }
 
@@ -73,6 +75,7 @@ public class SoldierObject implements GameObject {
             attackTime += game.frameTime;
 
             if (attackTime >= ATTACK_TIME) {
+                Sound.play(R.raw.sound_soldiers_fighting);
                 targetEnemy.giveDamage(damage);
                 attackTime -= ATTACK_TIME;
             }

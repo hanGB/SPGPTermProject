@@ -1,4 +1,4 @@
-package kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller;
+package kr.ac.kpu.s2018182039.kingdomrush.game.objects.bullet;
 
 import android.graphics.Canvas;
 import android.graphics.RectF;

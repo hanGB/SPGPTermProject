@@ -1,6 +1,5 @@
 package kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main;
 
-import android.graphics.Path;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
@@ -9,13 +8,14 @@ import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.CollisionHelper;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyGenerator;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyMovementPointsData;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyPathPoint;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.TowerLocationData;
-import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.BombBullet;
-import kr.ac.kpu.s2018182039.kingdomrush.game.objects.buller.Bullet;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.bullet.BombBullet;
+import kr.ac.kpu.s2018182039.kingdomrush.game.objects.bullet.Bullet;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower.TowerBuilder;
@@ -133,7 +133,11 @@ public class MainScene extends Scene {
             for (GameObject o2 : bullets){
                 Bullet bullet = (Bullet) o2;
                 if (CollisionHelper.collides(enemy, bullet)) {
+                    if (bullet.arrow) {
+                        Sound.play(R.raw.sound_arrow_hit3);
+                    }
                     if (enemy.giveDamage(bullet.damage)) {
+                        Sound.play(R.raw.sound_enemy_orc_dead);
                         remove(enemy, false);
                         giveGold(15);
                     }

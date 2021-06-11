@@ -10,6 +10,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmap;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.BoxCollidable;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.game.control.EnemyPathPoint;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
@@ -78,6 +79,9 @@ public class EnemyObject implements GameObject, BoxCollidable {
     public void update() {
         if (hp <= 0){
             BaseGame game = BaseGame.get();
+            Sound.play(R.raw.sound_enemy_orc_dead);
+            MainScene scene = (MainScene)game.getTopScene();
+            scene.giveGold(15);
             game.remove(this, true);
         }
 
@@ -86,6 +90,7 @@ public class EnemyObject implements GameObject, BoxCollidable {
             attackTime += game.frameTime;
 
             if (attackTime >= ATTACK_TIME) {
+                Sound.play(R.raw.sound_battle_axe);
                 targetSolider.hp -= damage;
                 attackTime -= ATTACK_TIME;
             }
@@ -107,6 +112,8 @@ public class EnemyObject implements GameObject, BoxCollidable {
                 BaseGame game = BaseGame.get();
                 if (nowPoint >= pointSize) {
                     game.remove(this, true);
+
+                    Sound.play(R.raw.sound_loose_life);
                     MainScene scene = (MainScene)game.getTopScene();
                     scene.damageToLife(1);
                     return;

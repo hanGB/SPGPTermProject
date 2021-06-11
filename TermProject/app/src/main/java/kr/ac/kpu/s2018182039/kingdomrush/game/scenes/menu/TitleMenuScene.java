@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.Scene;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.view.GameView;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.MovingButtonObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.ui.StaticDrawObject;
@@ -20,6 +21,8 @@ public class TitleMenuScene extends Scene {
     public static TitleMenuScene scene;
 
     private MovingButtonObject startButton;
+
+    private int bgmStreamId;
 
     public void add(TitleMenuScene.Layer layer, GameObject obj) {
         add(layer.ordinal(), obj);
@@ -49,6 +52,23 @@ public class TitleMenuScene extends Scene {
         add(Layer.bg, background);
         add(Layer.button, startButton);
         add(Layer.title, title);
+
+        bgmStreamId = Sound.playBG(R.raw.music_main_menu);
+    }
+
+    @Override
+    public void end() {
+        Sound.stopBG(bgmStreamId);
+    }
+
+    @Override
+    public void pause() {
+        Sound.stopBG(bgmStreamId);
+    }
+
+    @Override
+    public void resume() {
+        bgmStreamId = Sound.playBG(R.raw.music_main_menu);
     }
 
     @Override

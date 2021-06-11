@@ -2,8 +2,10 @@ package kr.ac.kpu.s2018182039.kingdomrush.game.objects.tower;
 
 import java.util.ArrayList;
 
+import kr.ac.kpu.s2018182039.kingdomrush.R;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.game.objects.friendly.SoldierObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
@@ -76,6 +78,7 @@ public class SoldierTower extends TowerObject {
         float dx = 1.0f;
         float dy = 1.0f;
         BaseGame game = BaseGame.get();
+        Sound.play(R.raw.sound_open_tower_menu);
         SoldierObject solider = new SoldierObject(x+50, y +50, gatheringPlaceX, gatheringPlaceY, towerId, damage);
         game.add(MainScene.Layer.friendly.ordinal(), solider);
     }

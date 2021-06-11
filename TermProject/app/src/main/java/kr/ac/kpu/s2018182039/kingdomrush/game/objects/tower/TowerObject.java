@@ -7,6 +7,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.AnimationGameBitmapVer
 import kr.ac.kpu.s2018182039.kingdomrush.framework.game.BaseGame;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.iface.GameObject;
 import kr.ac.kpu.s2018182039.kingdomrush.framework.bitmap.StaticGameBitmap;
+import kr.ac.kpu.s2018182039.kingdomrush.framework.utils.Sound;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class TowerObject implements GameObject {
@@ -83,6 +84,7 @@ public class TowerObject implements GameObject {
         if (scene.isCanBuy(50)) {
             isOn = false;
             damage += 1;
+            Sound.play(R.raw.sound_buy_upgrade);
             scene.giveGold(-50);
         }
     }
