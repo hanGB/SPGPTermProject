@@ -16,7 +16,7 @@ public class MagicTower extends TowerObject {
     private static final float FIRE_INTERVAL = 1.0f;
 
     private float fireTime;
-    private float range = 500.0f;
+    private float range = 400.0f;
     private boolean targetSetEnd = false;
     private EnemyObject targetEnemy;
 

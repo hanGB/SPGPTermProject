@@ -37,6 +37,10 @@ public class Score implements GameObject {
         this.score += amount;
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public boolean isNotExpensive(int amount) {
         return this.score >= amount;
     }

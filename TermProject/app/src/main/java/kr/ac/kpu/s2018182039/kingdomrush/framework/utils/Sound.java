@@ -48,11 +48,11 @@ public class Sound {
                     .build();
             Sound.soundPool = new SoundPool.Builder()
                     .setAudioAttributes(audioAttributes)
-                    .setMaxStreams(3)
+                    .setMaxStreams(10)
                     .build();
         }
         else {
-            Sound.soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
+            Sound.soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         }
 
         for (int resId: SOUND_IDS) {
