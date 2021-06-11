@@ -40,4 +40,13 @@ public class MovingButtonObject extends ButtonObject {
         BaseGame game = BaseGame.get();
         game.push(new StageSelectScene());
     }
+
+    public void initLocation(float x, float y, float dx, float dy) {
+        this.x = x;
+        this.y = y;
+        this.dx = dx;
+        this.dy = dy;
+        this.distanceX = dx - x;
+        this.distanceY = dy - y;
+    }
 }

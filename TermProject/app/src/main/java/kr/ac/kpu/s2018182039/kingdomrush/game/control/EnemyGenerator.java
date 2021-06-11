@@ -34,7 +34,7 @@ public class EnemyGenerator implements GameObject {
         damage = 5;
         generateCount = 0;
 
-        INITIAL_SPAWN_INTERVAL = 2.0f - stageId * 0.5f;
+        INITIAL_SPAWN_INTERVAL = 2.5f - stageId * 0.5f;
     }
 
     @Override

@@ -85,6 +85,10 @@ public class TitleMenuScene extends Scene {
         mediaPlayer = MediaPlayer.create(game.context, R.raw.music_main_menu);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
+
+        int w = GameView.view.getWidth();
+        int h = GameView.view.getHeight();
+        startButton.initLocation(w/2, h * 5 / 10,w/2, h * 7 / 10);
     }
 
     @Override
