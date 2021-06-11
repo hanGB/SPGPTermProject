@@ -61,10 +61,10 @@ public class BombBullet implements GameObject, BoxCollidable, Recyclable {
         int h = GameView.view.getHeight();
         boolean toBeDeleted = false;
 
-        if (x < 0 || x > w) {
+        if (x < -9999 || x > w + 9999) {
             toBeDeleted = true;
         }
-        if (y < 0 || y > h) {
+        if (y < -9999 || y > h + 9999) {
             toBeDeleted = true;
         }
 

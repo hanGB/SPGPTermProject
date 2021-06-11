@@ -56,19 +56,27 @@ public class EnemyGenerator implements GameObject {
             BaseGame game = BaseGame.get();
             MainScene scene = (MainScene)game.getTopScene();
             scene.increaseWave(1);
+
+            hp += wave * INCREASE_HP_PER_WAVE * stageId;
+            damage += wave * stageId;
+
+            if (wave % 5 == 0) {
+                hp += wave * INCREASE_HP_PER_WAVE * stageId * 2;
+                damage += wave * stageId * 2;
+            }
         }
 
         BaseGame game = BaseGame.get();
         EnemyObject enemy;
         if (stageId == 1) {
-            enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, false);
+            enemy = new EnemyObject(300, 300, hp, damage, false);
         }
         else {
             if (random.nextInt(2) == 1) {
-                enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, false);
+                enemy = new EnemyObject(300, 300, hp, damage, false);
             }
             else {
-               enemy = new EnemyObject(300, 300, hp + wave * INCREASE_HP_PER_WAVE * stageId, damage + wave * stageId, true);
+               enemy = new EnemyObject(300, 300, hp, damage, true);
             }
         }
         game.add(MainScene.Layer.enemy.ordinal(), enemy);

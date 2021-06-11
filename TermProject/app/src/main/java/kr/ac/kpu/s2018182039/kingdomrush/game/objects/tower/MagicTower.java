@@ -24,7 +24,7 @@ public class MagicTower extends TowerObject {
     MagicTower(float x, float y) {
         super(x, y, R.mipmap.magic_tower);
         fireTime = FIRE_INTERVAL;
-        damage = 5;
+        damage = 6;
     }
 
     @Override

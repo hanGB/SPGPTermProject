@@ -11,7 +11,7 @@ import kr.ac.kpu.s2018182039.kingdomrush.game.objects.enemy.EnemyObject;
 import kr.ac.kpu.s2018182039.kingdomrush.game.scenes.main.MainScene;
 
 public class ArcherTower extends TowerObject {
-    private static final int BULLET_SPEED = 1500;
+    private static final int BULLET_SPEED = 1000;
     private static final float FIRE_INTERVAL = 1.0f;
 
     private float fireTime;
@@ -22,7 +22,7 @@ public class ArcherTower extends TowerObject {
     ArcherTower(float x, float y) {
         super(x, y, R.mipmap.archer_tower);
         fireTime = FIRE_INTERVAL;
-        damage = 7;
+        damage = 5;
     }
 
     @Override
